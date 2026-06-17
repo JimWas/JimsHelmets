@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeHeads Cambodia | Pediatric Helmet Initiative</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Palette: Vibrant Sunset (Orange #FF5722, Amber #FFC107, Teal #009688, Deep Blue #1A237E) -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 350px; max-height: 400px; }
+        .hero-gradient { background: linear-gradient(135deg, #1A237E 0%, #009688 100%); }
+        .card-hover:hover { transform: translateY(-4px); transition: all 0.3s ease; }
+        .flow-node { position: relative; border-left: 4px solid #FF5722; padding-left: 1.5rem; }
+        .flow-node::before { content: ''; position: absolute; left: -10px; top: 0; width: 16px; height: 16px; border-radius: 50%; background: #FF5722; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="hero-gradient text-white py-16 px-6 shadow-2xl">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-4 tracking-tight">THE <span class="text-orange-400">10%</span> GAP</h1>
+            <p class="text-xl md:text-2xl font-light opacity-90 max-w-3xl mx-auto leading-relaxed">
+                While adult drivers in Cambodia have reached high levels of helmet compliance, their children remain unprotected. This is the silent crisis of Cambodian roads.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        
+        <section class="mb-16">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-b-8 border-orange-500 card-hover text-center">
+                    <span class="text-gray-500 uppercase font-bold text-xs tracking-widest">Child Helmet Use</span>
+                    <div class="text-6xl font-black text-orange-600 my-2">&lt;10%</div>
+                    <p class="text-sm text-gray-600">Nationwide average for child passengers under age 14.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-b-8 border-teal-500 card-hover text-center">
+                    <span class="text-gray-500 uppercase font-bold text-xs tracking-widest">Adult Compliance</span>
+                    <div class="text-6xl font-black text-teal-600 my-2">~78%</div>
+                    <p class="text-sm text-gray-600">Drivers who wear helmets due to strict law enforcement.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-b-8 border-blue-900 card-hover text-center">
+                    <span class="text-gray-500 uppercase font-bold text-xs tracking-widest">Injury Reduction</span>
+                    <div class="text-6xl font-black text-blue-900 my-2">70%</div>
+                    <p class="text-sm text-gray-600">Reduction in serious brain injury risk with a quality helmet.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20">
+            <div class="bg-white rounded-3xl shadow-xl overflow-hidden p-8 md:p-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl font-bold text-slate-900 mb-6">The Enforcement Disconnect</h2>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Since the 2016 Road Traffic Law, adult drivers face fines for not wearing helmets. However, enforcement for passengers—specifically children—remains lax. This visualization highlights the massive safety disparity between the person controlling the motorcycle and the child riding behind them.
+                        </p>
+                        <div class="bg-slate-50 p-6 rounded-xl border-l-4 border-teal-500">
+                            <p class="text-sm font-medium italic text-slate-700">
+                                "Parents often view helmets as a tool to avoid fines rather than a tool to save lives. Because police rarely stop children, the helmet stays at home."
+                            </p>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="usageChart"></canvas>
+                    </div>
+                </div>
+                <p class="mt-8 text-center text-sm font-semibold text-teal-700">Takeaway: Over 90% of children are currently exposed to fatal head trauma during daily commutes.</p>
+            </div>
+        </section>
+
+        <section class="mb-20 grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div class="bg-white p-8 rounded-3xl shadow-xl">
+                <h3 class="text-2xl font-bold mb-6 text-slate-900 text-center">Why the Hesitation?</h3>
+                <div class="chart-container">
+                    <canvas id="barriersChart"></canvas>
+                </div>
+                <div class="mt-6 space-y-4">
+                    <p class="text-sm text-gray-600">
+                        <strong>Cost (35%):</strong> High-quality pediatric helmets are often too expensive for rural families.
+                    </p>
+                    <p class="text-sm text-gray-600">
+                        <strong>The "Short Trip" Myth (40%):</strong> Many parents believe low speeds on local roads don't require protection.
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-3xl shadow-xl">
+                <h3 class="text-2xl font-bold mb-6 text-slate-900 text-center">Projected Impact (2026-2030)</h3>
+                <div class="chart-container">
+                    <canvas id="projectionChart"></canvas>
+                </div>
+                <p class="mt-4 text-xs text-center text-gray-500">Estimated lives saved per 100,000 children with intervention.</p>
+            </div>
+        </section>
+
+        <section class="mb-20 bg-slate-900 text-white rounded-3xl p-8 md:p-16">
+            <h2 class="text-4xl font-black mb-12 text-center">SafeHeads Cambodia Strategic Roadmap</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <div class="space-y-12">
+                    <div class="flow-node">
+                        <h4 class="text-xl font-bold text-orange-400">Phase 1: Local Manufacturing</h4>
+                        <p class="opacity-80 text-sm mt-2">Partnering with regional factories to produce affordable, ECE-certified helmets specifically sized for Khmer children.</p>
+                    </div>
+                    <div class="flow-node">
+                        <h4 class="text-xl font-bold text-orange-400">Phase 2: School-Based Distribution</h4>
+                        <p class="opacity-80 text-sm mt-2">Integrating helmet distribution into the primary school registration process across 5 key provinces.</p>
+                    </div>
+                    <div class="flow-node">
+                        <h4 class="text-xl font-bold text-orange-400">Phase 3: Policy Advocacy</h4>
+                        <p class="opacity-80 text-sm mt-2">Working with the National Road Safety Committee to mandate child helmet use with strict roadside penalties.</p>
+                    </div>
+                </div>
+                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+                    <h4 class="text-xl font-bold mb-4">Target Outcomes</h4>
+                    <ul class="space-y-6">
+                        <li class="flex items-center space-x-4">
+                            <span class="bg-orange-500 h-3 w-3 rounded-full"></span>
+                            <span>500,000 helmets distributed by 2028</span>
+                        </li>
+                        <li class="flex items-center space-x-4">
+                            <span class="bg-teal-500 h-3 w-3 rounded-full"></span>
+                            <span>80% child compliance in urban hubs</span>
+                        </li>
+                        <li class="flex items-center space-x-4">
+                            <span class="bg-amber-500 h-3 w-3 rounded-full"></span>
+                            <span>$45M saved in medical/productivity costs</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold text-center mb-12">Economic Burden of Inaction</h2>
+            <div id="economicPlot" class="w-full h-[450px] bg-white rounded-3xl shadow-xl p-4"></div>
+            <p class="text-center mt-6 text-gray-500 max-w-2xl mx-auto">
+                This scatter analysis demonstrates the direct correlation between regional helmet compliance and healthcare savings for the Cambodian Ministry of Health.
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-100 py-12 px-6 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-6 md:mb-0 text-center md:text-left">
+                <div class="text-2xl font-black text-slate-900 tracking-tighter italic">SAFEHEADS<span class="text-orange-600">KH</span></div>
+                <p class="text-xs text-gray-500 mt-1">Protecting Cambodia's Future, One Helmet at a Time.</p>
+            </div>
+            <div class="text-xs text-gray-400 uppercase tracking-widest font-bold">
+                2026 Strategic Initiative Dashboard
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function wrapLabels(label) {
+            if (typeof label !== 'string' || label.length <= 16) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > 16) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
+
+        const tooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        const usageCtx = document.getElementById('usageChart').getContext('2d');
+        new Chart(usageCtx, {
+            type: 'bar',
+            data: {
+                labels: [wrapLabels('Adult Motorcyclist Drivers'), wrapLabels('Primary School Child Passengers'), wrapLabels('Infant and Toddler Passengers')],
+                datasets: [{
+                    label: 'Helmet Usage Rate (%)',
+                    data: [78, 9, 3],
+                    backgroundColor: ['#009688', '#FF5722', '#FFC107'],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    y: { beginAtZero: true, max: 100 }
+                }
+            }
+        });
+
+        const barriersCtx = document.getElementById('barriersChart').getContext('2d');
+        new Chart(barriersCtx, {
+            type: 'doughnut',
+            data: {
+                labels: [wrapLabels('Perceived Safety on Short Trips'), wrapLabels('Financial Constraints'), wrapLabels('Lack of Awareness of Law'), wrapLabels('Helmet Comfort and Fit')],
+                datasets: [{
+                    data: [40, 35, 15, 10],
+                    backgroundColor: ['#FF5722', '#FFC107', '#009688', '#1A237E'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { boxWidth: 12, padding: 20 } },
+                    tooltip: tooltipConfig
+                }
+            }
+        });
+
+        const projectionCtx = document.getElementById('projectionChart').getContext('2d');
+        new Chart(projectionCtx, {
+            type: 'line',
+            data: {
+                labels: ['2026', '2027', '2028', '2029', '2030'],
+                datasets: [{
+                    label: 'Estimated Lives Saved',
+                    data: [45, 120, 280, 550, 890],
+                    borderColor: '#009688',
+                    backgroundColor: 'rgba(0, 150, 136, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#FF5722'
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: { tooltip: tooltipConfig },
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        const economicTrace = {
+            x: [10, 20, 30, 40, 50, 60, 70, 80],
+            y: [5, 12, 18, 30, 45, 62, 85, 110],
+            mode: 'markers+lines',
+            type: 'scattergl',
+            marker: { size: 12, color: '#FF5722' },
+            line: { color: '#1A237E', width: 3 },
+            name: 'Cost Savings'
+        };
+
+        const economicLayout = {
+            title: 'Helmet Use (%) vs. Healthcare Savings ($ Millions)',
+            xaxis: { title: 'Compliance Rate (%)' },
+            yaxis: { title: 'Estimated Annual Savings (USD)' },
+            margin: { t: 50, b: 50, l: 60, r: 20 },
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)'
+        };
+
+        Plotly.newPlot('economicPlot', [economicTrace], economicLayout, { responsive: true, displayModeBar: false });
+
+    </script>
+</body>
+</html>

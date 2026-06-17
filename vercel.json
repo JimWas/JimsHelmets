@@ -1,0 +1,33 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/website/index.html"
+    },
+    {
+      "source": "/problem",
+      "destination": "/website/problem.html"
+    },
+    {
+      "source": "/helmet",
+      "destination": "/website/helmet.html"
+    },
+    {
+      "source": "/work",
+      "destination": "/website/work.html"
+    },
+    {
+      "source": "/impact",
+      "destination": "/website/impact.html"
+    },
+    {
+      "source": "/donate",
+      "destination": "/website/donate.html"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/website/:path*"
+    }
+  ]
+}

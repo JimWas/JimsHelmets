@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Physics of Fragility | Pediatric G-Force Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <!-- Palette: Energetic & Playful (Deep Navy #1A237E, Vivid Red #D32F2F, Amber #FFC107, White #FFFFFF) -->
+    <style>
+        body { font-family: 'Space Grotesk', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .chart-container { position: relative; width: 100%; max-width: 650px; margin-left: auto; margin-right: auto; height: 350px; max-height: 400px; }
+        .g-force-bg { background: linear-gradient(180deg, #1A237E 0%, #D32F2F 100%); }
+        .stat-card { border-radius: 1.5rem; background: white; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); border-left: 8px solid #D32F2F; }
+        .impact-pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.05); opacity: 0.8; } 100% { transform: scale(1); opacity: 1; } }
+    </style>
+</head>
+<body class="pb-16">
+
+    <header class="g-force-bg text-white py-20 px-6 text-center shadow-2xl">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 tracking-tighter uppercase">Physics of <span class="text-amber-400">Fragility</span></h1>
+            <p class="text-xl md:text-2xl font-light opacity-90 leading-relaxed">
+                A child's brain is not a small version of an adult's. It is more liquid, less shielded, and breaks at speeds we consider "safe."
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 -mt-12">
+        
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            <div class="stat-card p-8">
+                <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">The Fatal Threshold</h3>
+                <div class="text-6xl font-bold text-[#1A237E]">90 G's</div>
+                <p class="mt-4 text-slate-600 leading-relaxed">
+                    While an adult skull might withstand 120-150 Gs, <strong>90 Gs</strong> is the critical limit where pediatric brain tissue begins to tear (Diffuse Axonal Injury).
+                </p>
+            </div>
+            <div class="stat-card p-8 border-[#FFC107]">
+                <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">The Asphalt Reality</h3>
+                <div class="text-6xl font-bold text-[#D32F2F]">200+ G's</div>
+                <p class="mt-4 text-slate-600 leading-relaxed">
+                    A simple fall from a motorcycle seat at 30 km/h onto concrete generates over <strong>200 Gs</strong> of instantaneous deceleration.
+                </p>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-xl mb-16">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold mb-4 text-[#1A237E]">G-Force Survival Spectrum</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">
+                    This chart compares common physical experiences to the forces generated during a motorcycle crash. Note the "Survival Gap" between child limits and impact reality.
+                </p>
+            </div>
+            <div class="chart-container">
+                <canvas id="gLadderChart"></canvas>
+            </div>
+            <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="p-4 bg-slate-50 rounded-xl">
+                    <span class="block text-2xl font-bold text-blue-600">3-5 G</span>
+                    <span class="text-xs uppercase font-bold text-slate-400">Rollercoaster</span>
+                </div>
+                <div class="p-4 bg-slate-50 rounded-xl">
+                    <span class="block text-2xl font-bold text-orange-500">40-60 G</span>
+                    <span class="text-xs uppercase font-bold text-slate-400">Concussion Zone</span>
+                </div>
+                <div class="p-4 bg-red-50 rounded-xl">
+                    <span class="block text-2xl font-bold text-red-600">90+ G</span>
+                    <span class="text-xs uppercase font-bold text-slate-400">Fatal TBI (Child)</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+            <div class="lg:col-span-2 bg-[#1A237E] text-white p-10 rounded-[2.5rem] shadow-2xl">
+                <h2 class="text-3xl font-bold mb-6">Velocity vs. Impact Intensity</h2>
+                <p class="opacity-80 mb-8">
+                    G-force doesn't increase linearly with speed; it increases exponentially. A "small" increase in motorcycle speed results in a massive surge in brain trauma potential.
+                </p>
+                <div class="chart-container h-[300px]">
+                    <canvas id="velocityChart"></canvas>
+                </div>
+            </div>
+            <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border border-slate-100">
+                <h3 class="text-xl font-bold mb-6 text-[#D32F2F]">Biological Disparity</h3>
+                <div class="space-y-8">
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm font-bold">Brain Water Content</span>
+                            <span class="text-sm text-blue-600 font-bold">88% (Child)</span>
+                        </div>
+                        <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
+                            <div class="bg-blue-500 h-full w-[88%]"></div>
+                        </div>
+                        <p class="text-[10px] text-slate-400 mt-1 uppercase">Higher water = higher risk of swelling and axonal shearing.</p>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm font-bold">Skull Thickness</span>
+                            <span class="text-sm text-amber-500 font-bold">2.1mm (Child)</span>
+                        </div>
+                        <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
+                            <div class="bg-amber-500 h-full w-[35%]"></div>
+                        </div>
+                        <p class="text-[10px] text-slate-400 mt-1 uppercase">Child skulls are 3x thinner and more pliable than adults.</p>
+                    </div>
+                </div>
+                <div class="mt-8 p-6 bg-red-50 rounded-2xl border-2 border-dashed border-red-200">
+                    <p class="text-xs text-red-800 font-medium italic">
+                        "The child's brain moves inside the skull like a liquid, not a solid. In a 100G impact, the brain strikes the inner skull with enough force to cause permanent cognitive loss."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="text-center p-12 bg-white rounded-[3rem] shadow-2xl border-4 border-[#D32F2F]">
+            <h2 class="text-4xl font-bold mb-6 text-[#1A237E] impact-pulse">THE 2-MILLISECOND SHIELD</h2>
+            <p class="text-xl text-slate-600 max-w-3xl mx-auto font-light leading-relaxed mb-8">
+                A helmet doesn't stop the impact; it <strong>slows it down.</strong> By compressing the EPS foam liner for just <span class="font-bold text-[#D32F2F]">2 extra milliseconds</span>, a helmet drops the G-force from 200+ (Fatal) to under 60 (Survivable). 
+            </p>
+            <div class="inline-block bg-[#1A237E] text-white px-10 py-4 rounded-full font-bold text-lg shadow-xl">
+                Time is Survival. Protect the Future.
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="mt-20 text-center py-10 opacity-40">
+        <p class="text-xs font-bold uppercase tracking-widest text-[#1A237E]">Biomechanics Analysis 2026 | SafeHeads KH Research</p>
+    </footer>
+
+    <script>
+        function wrapLabels(label) {
+            if (typeof label !== 'string' || label.length <= 16) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > 16) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
+
+        const tooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        const gLadderCtx = document.getElementById('gLadderChart').getContext('2d');
+        new Chart(gLadderCtx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    wrapLabels('Rollercoaster Max'),
+                    wrapLabels('Severe Sneeze'),
+                    wrapLabels('Safe Pediatric Limit'),
+                    wrapLabels('Concussion Threshold'),
+                    wrapLabels('Fatal Child Limit'),
+                    wrapLabels('Unprotected Crash (40km/h)')
+                ],
+                datasets: [{
+                    label: 'G-Force Intensity',
+                    data: [5, 3, 45, 75, 90, 240],
+                    backgroundColor: ['#1A237E', '#3F51B5', '#FFC107', '#FF9800', '#F44336', '#D32F2F'],
+                    borderRadius: 15
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    y: { 
+                        beginAtZero: true, 
+                        title: { display: true, text: 'G-Units', color: '#64748b' }
+                    },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        const velocityCtx = document.getElementById('velocityChart').getContext('2d');
+        new Chart(velocityCtx, {
+            type: 'line',
+            data: {
+                labels: ['0km/h', '10km/h', '20km/h', '30km/h', '40km/h', '50km/h', '60km/h'],
+                datasets: [{
+                    label: 'Unprotected G-Load',
+                    data: [0, 20, 65, 120, 210, 340, 520],
+                    borderColor: '#FFC107',
+                    borderWidth: 4,
+                    pointBackgroundColor: '#D32F2F',
+                    fill: false,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: '#ffffff' } },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    y: { 
+                        beginAtZero: true, 
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        ticks: { color: '#ffffff' }
+                    },
+                    x: { 
+                        grid: { display: false },
+                        ticks: { color: '#ffffff' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

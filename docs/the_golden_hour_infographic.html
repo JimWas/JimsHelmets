@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Golden Hour | Cambodia Trauma Gap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <!-- Palette: Brilliant Blues (#1A237E, #2196F3, #00BCD4, #E3F2FD) -->
+    <style>
+        body { font-family: 'Outfit', sans-serif; background-color: #f0f4f8; color: #1e293b; }
+        .chart-container { position: relative; width: 100%; max-width: 700px; margin-left: auto; margin-right: auto; height: 350px; max-height: 400px; }
+        .emergency-glow { box-shadow: 0 0 20px rgba(33, 150, 243, 0.3); }
+        .delay-step { position: relative; background: white; padding: 1.5rem; border-radius: 1rem; border-left: 6px solid #1A237E; }
+        .delay-step::after { content: '↓'; position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); color: #1A237E; font-weight: bold; font-size: 1.5rem; }
+        .delay-step:last-child::after { content: ''; }
+    </style>
+</head>
+<body class="pb-20">
+
+    <header class="bg-[#1A237E] text-white py-20 px-6 overflow-hidden relative">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-[#2196F3] opacity-10 rounded-full -mr-32 -mt-32"></div>
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tight">THE <span class="text-[#00BCD4]">GOLDEN</span> HOUR</h1>
+            <p class="text-xl md:text-2xl font-light opacity-90 max-w-2xl mx-auto">
+                In trauma care, 60 minutes determines life or death. In Cambodia, that window closes before the ambulance even arrives.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 -mt-10">
+        
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            <div class="bg-white p-8 rounded-3xl shadow-xl border-t-4 border-[#00BCD4] text-center">
+                <div class="text-4xl font-black text-[#1A237E]">60 min</div>
+                <p class="text-sm font-bold text-slate-500 uppercase mt-2">The Standard Window</p>
+                <p class="text-xs text-slate-400 mt-2">Time limit for surgical intervention to prevent TBI mortality.</p>
+            </div>
+            <div class="bg-white p-8 rounded-3xl shadow-xl border-t-4 border-[#2196F3] text-center">
+                <div class="text-4xl font-black text-[#1A237E]">126 min</div>
+                <p class="text-sm font-bold text-slate-500 uppercase mt-2">Avg. Rural Transport</p>
+                <p class="text-xs text-slate-400 mt-2">Median time from motorcycle crash to hospital arrival in provinces.</p>
+            </div>
+            <div class="bg-white p-8 rounded-3xl shadow-xl border-t-4 border-red-500 text-center">
+                <div class="text-4xl font-black text-red-600">3x</div>
+                <p class="text-sm font-bold text-slate-500 uppercase mt-2">Pediatric Decay</p>
+                <p class="text-xs text-slate-400 mt-2">Children's brain tissue swells 3x faster than adults after impact.</p>
+            </div>
+        </section>
+
+        <section class="mb-20 bg-white rounded-[2rem] p-8 md:p-12 shadow-2xl">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold mb-4">The Survival Decay Curve</h2>
+                <p class="text-slate-600 max-w-3xl mx-auto">
+                    This data visualizes the probability of a "Good Outcome" (survival without severe disability) following a high-speed motorcycle head impact without a helmet. Every minute of delay in specialized neuro-triage costs lives.
+                </p>
+            </div>
+            <div class="chart-container">
+                <canvas id="survivalChart"></canvas>
+            </div>
+            <div class="mt-8 bg-[#E3F2FD] p-6 rounded-2xl border-l-4 border-[#2196F3]">
+                <p class="text-sm text-[#1A237E] leading-relaxed italic">
+                    <strong>The Insight:</strong> By the time a rural Cambodian child reaches a facility capable of a CT scan (usually 2+ hours), the survival probability has already dropped below 15%. This makes <strong>pre-hospital prevention</strong> the only viable medical strategy.
+                </p>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+            <section>
+                <h3 class="text-2xl font-bold mb-8 flex items-center">
+                    <span class="bg-[#1A237E] text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">!</span>
+                    The Chain of Systemic Delay
+                </h3>
+                <div class="space-y-10">
+                    <div class="delay-step">
+                        <h4 class="font-bold text-[#1A237E]">1. The "Bystander" Delay (10-20 mins)</h4>
+                        <p class="text-sm text-slate-600">Lack of centralized 119 dispatch in many areas means reliance on private citizens to find transport.</p>
+                    </div>
+                    <div class="delay-step">
+                        <h4 class="font-bold text-[#1A237E]">2. The "Logistics" Gap (30-60 mins)</h4>
+                        <p class="text-sm text-slate-600">Severe traffic congestion in Phnom Penh or poor road quality in rural zones stalls ambulance movement.</p>
+                    </div>
+                    <div class="delay-step">
+                        <h4 class="font-bold text-[#1A237E]">3. The "Financial" Triage (15-30 mins)</h4>
+                        <p class="text-sm text-slate-600">Time lost at private clinics that lack the equipment for head trauma but require payment before transfer to public specialists.</p>
+                    </div>
+                    <div class="delay-step">
+                        <h4 class="font-bold text-[#1A237E]">4. The Surgical Queue (Total: >180 mins)</h4>
+                        <p class="text-sm text-slate-600 font-bold text-red-600">Result: The Golden Hour is missed by over 200% in 85% of pediatric cases.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-slate-900 text-white p-8 rounded-[2rem] shadow-2xl flex flex-col justify-center">
+                <h3 class="text-2xl font-bold mb-6 text-center">Arrival Time vs. Global Standards</h3>
+                <div class="chart-container">
+                    <canvas id="timeComparisonChart"></canvas>
+                </div>
+                <div class="mt-10 space-y-4">
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                        <span class="text-sm opacity-70">WHO Recommended Time</span>
+                        <span class="font-bold text-[#00BCD4]">8-10 mins</span>
+                    </div>
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                        <span class="text-sm opacity-70">Phnom Penh (Rush Hour)</span>
+                        <span class="font-bold text-orange-400">45-70 mins</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm opacity-70">Rural Provinces</span>
+                        <span class="font-bold text-red-500">120+ mins</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section class="text-center bg-gradient-to-r from-[#1A237E] to-[#2196F3] text-white p-12 rounded-[3rem] shadow-2xl">
+            <h2 class="text-3xl md:text-5xl font-black mb-6 italic">THERE IS NO ICU ON A MOTORCYCLE.</h2>
+            <p class="text-xl opacity-90 max-w-3xl mx-auto font-light leading-relaxed mb-8">
+                Since we cannot build 1,000 trauma centers overnight, we must put the protection on the child. A helmet is the only medical intervention that starts at <span class="font-black text-[#00BCD4]">Second Zero.</span>
+            </p>
+            <div class="inline-block bg-white text-[#1A237E] px-8 py-3 rounded-full font-bold text-lg">
+                SafeHeads Action Plan: Phase 2
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="mt-20 text-center py-12 border-t border-slate-200">
+        <p class="text-xs uppercase tracking-widest text-slate-400 font-bold">2026 Pediatric Road Trauma Analysis | SafeHeads KH</p>
+    </footer>
+
+    <script>
+        function wrapLabels(label) {
+            if (typeof label !== 'string' || label.length <= 16) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > 16) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
+
+        const tooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        const survivalCtx = document.getElementById('survivalChart').getContext('2d');
+        new Chart(survivalCtx, {
+            type: 'line',
+            data: {
+                labels: ['0 Mins', '15 Mins', '30 Mins', '45 Mins', '60 Mins', '90 Mins', '120 Mins'],
+                datasets: [{
+                    label: 'Survival Probability (%)',
+                    data: [98, 85, 65, 40, 20, 10, 5],
+                    borderColor: '#00BCD4',
+                    backgroundColor: 'rgba(0, 188, 212, 0.2)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 6,
+                    pointBackgroundColor: '#1A237E'
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    y: { 
+                        beginAtZero: true, 
+                        max: 100,
+                        title: { display: true, text: 'Probability of Good Outcome (%)', color: '#64748b' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        const timeCtx = document.getElementById('timeComparisonChart').getContext('2d');
+        new Chart(timeCtx, {
+            type: 'bar',
+            data: {
+                labels: [wrapLabels('Global EMS Standard'), wrapLabels('Urban Cambodia Avg'), wrapLabels('Rural Cambodia Avg')],
+                datasets: [{
+                    label: 'Minutes to Facility',
+                    data: [10, 55, 126],
+                    backgroundColor: ['#00BCD4', '#2196F3', '#1A237E'],
+                    borderRadius: 10
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    x: { beginAtZero: true, grid: { color: '#334155' }, ticks: { color: '#94a3b8' } },
+                    y: { ticks: { color: '#ffffff', font: { weight: 'bold' } } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

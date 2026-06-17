@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Paradox of Protection | Cambodia Child Safety</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Palette: Vibrant Sunset (Deep Blue #1A237E, Orange #FF5722, Amber #FFC107, Teal #009688) -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f8fafc; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 350px; max-height: 400px; }
+        .comparison-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .comparison-card:hover { transform: scale(1.02); }
+        .divider { width: 4px; background: linear-gradient(to bottom, #FF5722, #FFC107); }
+    </style>
+</head>
+<body class="p-4 md:p-12">
+
+    <header class="max-w-5xl mx-auto text-center mb-16">
+        <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4 uppercase">
+            The Paradox of <span class="text-orange-500">Perception</span>
+        </h1>
+        <p class="text-xl text-slate-400 max-w-2xl mx-auto">
+            Why do we view one as a daily necessity and the other as child endangerment when the physics of the crash are identical?
+        </p>
+    </header>
+
+    <main class="max-w-6xl mx-auto">
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-0 border-2 border-slate-800 rounded-3xl overflow-hidden shadow-2xl mb-16">
+            
+            <div class="bg-slate-900 p-8 md:p-12 comparison-card border-b-2 lg:border-b-0 lg:border-r-2 border-slate-800">
+                <div class="bg-teal-500/10 text-teal-500 font-bold px-3 py-1 rounded-full text-xs inline-block mb-4">THE CULTURAL NORM</div>
+                <h2 class="text-3xl font-black mb-6">Child on a Motorcycle <br><span class="text-teal-400">(No Helmet)</span></h2>
+                <div class="space-y-6 text-slate-300">
+                    <p class="leading-relaxed">
+                        Every day in Cambodia, thousands of children ride as passengers without head protection. Because it is common, it is perceived as "managed risk."
+                    </p>
+                    <div class="bg-slate-800 p-6 rounded-xl border-l-4 border-teal-500">
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex items-center">
+                                <span class="mr-2 text-teal-500">●</span> 0% Mechanical Constraint
+                            </li>
+                            <li class="flex items-center">
+                                <span class="mr-2 text-teal-500">●</span> Direct exposure to road surface
+                            </li>
+                            <li class="flex items-center">
+                                <span class="mr-2 text-teal-500">●</span> Unshielded skull impact risk
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 p-8 md:p-12 comparison-card">
+                <div class="bg-orange-500/10 text-orange-500 font-bold px-3 py-1 rounded-full text-xs inline-block mb-4">THE ABSURD ANALOGY</div>
+                <h2 class="text-3xl font-black mb-6">Child on a Car Roof <br><span class="text-orange-400">(No Restraints)</span></h2>
+                <div class="space-y-6 text-slate-300">
+                    <p class="leading-relaxed">
+                        If a parent strapped a child to the roof of a car and drove into traffic, it would cause public outrage. Yet, the physical vulnerability is statistically equivalent.
+                    </p>
+                    <div class="bg-slate-800 p-6 rounded-xl border-l-4 border-orange-500">
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex items-center">
+                                <span class="mr-2 text-orange-500">●</span> 0% Mechanical Constraint
+                            </li>
+                            <li class="flex items-center">
+                                <span class="mr-2 text-orange-500">●</span> High-velocity ejection risk
+                            </li>
+                            <li class="flex items-center">
+                                <span class="mr-2 text-orange-500">●</span> Fatal impact potential
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20">
+            <div class="text-center mb-12">
+                <h3 class="text-2xl font-bold mb-4">The Physics of Trauma</h3>
+                <p class="text-slate-400 max-w-3xl mx-auto">
+                    At a modest urban speed of 30 km/h, the energy transferred to a child's head during a fall is enough to cause irreversible brain damage. Whether that fall happens from a motorcycle seat or a car roof, the skull provides the same (zero) protection against asphalt.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="bg-slate-900 p-8 rounded-3xl border border-slate-800 shadow-xl">
+                    <h4 class="text-center font-bold mb-6 text-teal-400 uppercase tracking-widest text-sm">Risk Overlap Analysis</h4>
+                    <div class="chart-container">
+                        <canvas id="riskRadar"></canvas>
+                    </div>
+                </div>
+                <div class="space-y-8">
+                    <div class="bg-slate-900 p-6 rounded-2xl border-l-8 border-orange-500">
+                        <h5 class="text-orange-500 font-black text-xl mb-2">Kinetic Reality</h5>
+                        <p class="text-sm text-slate-300">
+                            A child's skull is thinner and more flexible than an adult's. In both the "Norm" and "Analogy" scenarios, the primary threat is <strong>Deceleration Trauma</strong>—where the brain hits the inside of the skull at the same speed the vehicle was traveling.
+                        </p>
+                    </div>
+                    <div class="bg-slate-900 p-6 rounded-2xl border-l-8 border-amber-500">
+                        <h5 class="text-amber-500 font-black text-xl mb-2">Height vs Velocity</h5>
+                        <p class="text-sm text-slate-300">
+                            Falling from a motorcycle seat at 40 km/h creates an impact force equivalent to falling from the top of a 2-story building directly onto your head.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20 bg-gradient-to-br from-slate-900 to-indigo-950 p-8 md:p-16 rounded-3xl border border-slate-700 text-center">
+            <h2 class="text-3xl md:text-5xl font-black mb-8 italic">"IT'S ONLY A SHORT TRIP."</h2>
+            <div class="chart-container mb-8">
+                <canvas id="impactBar"></canvas>
+            </div>
+            <p class="text-xl text-slate-300 max-w-2xl mx-auto font-light leading-relaxed">
+                Over 80% of fatal head injuries occur within <span class="text-orange-500 font-bold">5 kilometers</span> of the home. Slow speeds do not negate gravity. A fall is a fall.
+            </p>
+        </section>
+    </main>
+
+    <footer class="text-center py-12 border-t border-slate-800 opacity-50">
+        <p class="text-xs uppercase tracking-widest">SafeHeads Cambodia | Data Comparison 2026</p>
+    </footer>
+
+    <script>
+        function wrapLabels(label) {
+            if (typeof label !== 'string' || label.length <= 16) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > 16) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
+
+        const tooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        const radarCtx = document.getElementById('riskRadar').getContext('2d');
+        new Chart(radarCtx, {
+            type: 'radar',
+            data: {
+                labels: [wrapLabels('Fatal Head Injury Risk'), wrapLabels('Internal Organ Trauma'), wrapLabels('Ejection Probability'), wrapLabels('Asphalt Abrasion'), wrapLabels('Permanent Disability')],
+                datasets: [
+                    {
+                        label: 'No Helmet Moto',
+                        data: [95, 40, 85, 90, 80],
+                        borderColor: '#009688',
+                        backgroundColor: 'rgba(0, 150, 136, 0.2)',
+                        pointBackgroundColor: '#009688'
+                    },
+                    {
+                        label: 'Strapped to Roof',
+                        data: [98, 45, 95, 80, 85],
+                        borderColor: '#FF5722',
+                        backgroundColor: 'rgba(255, 87, 34, 0.2)',
+                        pointBackgroundColor: '#FF5722'
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: '#334155' },
+                        grid: { color: '#334155' },
+                        pointLabels: { color: '#94a3b8', font: { size: 10 } },
+                        ticks: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { labels: { color: '#f8fafc' } },
+                    tooltip: tooltipConfig
+                }
+            }
+        });
+
+        const barCtx = document.getElementById('impactBar').getContext('2d');
+        new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: [wrapLabels('Impact Force at 20km/h'), wrapLabels('Impact Force at 40km/h'), wrapLabels('Impact Force at 60km/h')],
+                datasets: [
+                    {
+                        label: 'Force G-Rating',
+                        data: [15, 65, 140],
+                        backgroundColor: ['#FFC107', '#FF5722', '#1A237E'],
+                        borderRadius: 12
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    y: { 
+                        beginAtZero: true,
+                        grid: { color: '#1e293b' },
+                        ticks: { color: '#94a3b8' }
+                    },
+                    x: {
+                        ticks: { color: '#94a3b8' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

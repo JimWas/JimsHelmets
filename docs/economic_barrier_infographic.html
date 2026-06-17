@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Economics of Survival | Cambodia Child Safety</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap" rel="stylesheet">
+    <!-- Palette: Energetic & Playful (Deep Navy #1A237E, Vivid Red #D32F2F, Amber #FFC107, White #FFFFFF) -->
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; color: #1e293b; }
+        .chart-container { position: relative; width: 100%; max-width: 650px; margin-left: auto; margin-right: auto; height: 350px; max-height: 400px; }
+        .budget-card { border-left: 12px solid #1A237E; background: #f8fafc; transition: all 0.3s ease; }
+        .budget-card:hover { border-left-color: #FFC107; background: #fff; transform: translateX(5px); }
+        .step-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: #cbd5e1; z-index: 0; }
+        .step-dot { width: 40px; height: 40px; background: #1A237E; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; position: relative; z-index: 10; margin: 0 auto; }
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <header class="bg-[#1A237E] text-white py-24 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">THE <span class="text-[#FFC107]">COST</span> OF PROTECTION</h1>
+            <p class="text-xl md:text-2xl font-light opacity-80">
+                When a family earns $150 a month, a $20 helmet isn't just a purchase—it's 4 days of food for the entire household.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 -mt-16">
+        
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
+            <div class="bg-white p-10 rounded-[3rem] shadow-2xl">
+                <h2 class="text-3xl font-extrabold text-[#1A237E] mb-6">The $150 Monthly Dilemma</h2>
+                <p class="text-slate-600 mb-8 leading-relaxed">
+                    A typical garment or agricultural family budget in Cambodia is pre-allocated. After microfinance repayments and essentials, a quality helmet is perceived as a luxury, especially since children "grow out of them."
+                </p>
+                <div class="chart-container">
+                    <canvas id="budgetChart"></canvas>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <div class="budget-card p-6 rounded-2xl shadow-sm">
+                    <h3 class="font-bold text-lg text-[#1A237E]">Food & Water ($65)</h3>
+                    <p class="text-sm text-slate-500 italic">43% of total income. Non-negotiable daily survival.</p>
+                </div>
+                <div class="budget-card p-6 rounded-2xl shadow-sm border-[#D32F2F]">
+                    <h3 class="font-bold text-lg text-[#D32F2F]">Microfinance Debt ($40)</h3>
+                    <p class="text-sm text-slate-500 italic">Interest and principal for land or equipment loans.</p>
+                </div>
+                <div class="budget-card p-6 rounded-2xl shadow-sm">
+                    <h3 class="font-bold text-lg text-[#1A237E]">Utilities & School ($30)</h3>
+                    <p class="text-sm text-slate-500 italic">Electric, phone credit, and school materials.</p>
+                </div>
+                <div class="bg-[#FFC107] p-8 rounded-3xl shadow-xl text-[#1A237E]">
+                    <h3 class="text-2xl font-black mb-2">$15 REMAINING</h3>
+                    <p class="text-sm font-bold uppercase tracking-wider">The "Helmet Gap"</p>
+                    <p class="text-sm mt-4 opacity-90 font-medium">
+                        A quality, ECE-certified child helmet costs <strong>$20 - $25</strong>. A family must save for two months just to buy protection that will be outgrown in 18 months.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-[4rem] p-8 md:p-16 shadow-2xl mb-20 text-center">
+            <h2 class="text-4xl font-extrabold text-[#1A237E] mb-6">The Outgrowth Obsolescence</h2>
+            <p class="text-slate-500 max-w-3xl mx-auto mb-12">
+                Children's heads grow rapidly during the most vulnerable riding ages (2 to 10 years). Parents avoid the investment because "next year it won't fit," leading to the dangerous use of adult helmets (too loose) or no helmet at all.
+            </p>
+            <div class="chart-container h-[400px]">
+                <canvas id="growthChart"></canvas>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                <div class="p-6 border-2 border-dashed border-slate-200 rounded-3xl">
+                    <span class="text-xs font-black text-slate-400 uppercase">Age 2-4</span>
+                    <p class="text-lg font-bold text-[#D32F2F]">Small Shell</p>
+                </div>
+                <div class="p-6 border-2 border-dashed border-slate-200 rounded-3xl">
+                    <span class="text-xs font-black text-slate-400 uppercase">Age 5-8</span>
+                    <p class="text-lg font-bold text-[#1A237E]">Medium Shell</p>
+                </div>
+                <div class="p-6 border-2 border-dashed border-slate-200 rounded-3xl">
+                    <span class="text-xs font-black text-slate-400 uppercase">Age 9+</span>
+                    <p class="text-lg font-bold text-[#1A237E]">Large Shell</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20">
+            <div class="bg-[#1A237E] text-white rounded-[3rem] p-12 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-[#D32F2F] opacity-10 rounded-full -mr-32 -mt-32"></div>
+                <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-4xl font-extrabold mb-6">The "Debt Trap" <br><span class="text-[#FFC107]">vs. Prevention</span></h2>
+                        <p class="opacity-80 mb-8 leading-relaxed">
+                            While $20 seems expensive now, the medical cost of a survivable head injury in a private Phnom Penh clinic starts at <strong>$2,500</strong>. This forces families into predatory lending and lifelong poverty.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-end border-b border-white/20 pb-2">
+                                <span class="text-sm">Cost of Helmet</span>
+                                <span class="text-2xl font-bold">$20</span>
+                            </div>
+                            <div class="flex justify-between items-end border-b border-white/20 pb-2">
+                                <span class="text-sm">Cost of TBI Surgery</span>
+                                <span class="text-2xl font-bold text-[#FFC107]">$3,500+</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="costCompareChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-4xl mx-auto mb-20 text-center">
+            <h2 class="text-4xl font-extrabold text-[#1A237E] mb-12">The "SafeHeads" Subscription Strategy</h2>
+            <div class="relative space-y-16">
+                <div class="step-line hidden md:block"></div>
+                
+                <div class="relative grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="md:text-right">
+                        <h4 class="text-xl font-bold text-[#D32F2F]">1. Initial Subsidized Entry</h4>
+                        <p class="text-sm text-slate-500">Family pays $5 (instead of $20) for the first certified helmet, sponsored by CSR grants.</p>
+                    </div>
+                    <div class="step-dot">1</div>
+                </div>
+
+                <div class="relative grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="md:order-last md:text-left">
+                        <h4 class="text-xl font-bold text-[#1A237E]">2. The Growth Swap</h4>
+                        <p class="text-sm text-slate-500">When the child outgrows the helmet, the family returns it and pays a $2 "Refresh Fee" for the next size up.</p>
+                    </div>
+                    <div class="step-dot">2</div>
+                </div>
+
+                <div class="relative grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="md:text-right">
+                        <h4 class="text-xl font-bold text-[#1A237E]">3. Refurbishment Cycle</h4>
+                        <p class="text-sm text-slate-500">SafeHeads technicians inspect returned helmets. Non-impacted shells are deep-cleaned, fitted with new liners, and re-issued.</p>
+                    </div>
+                    <div class="step-dot">3</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-[#D32F2F] text-white p-12 rounded-[3rem] text-center shadow-2xl">
+            <h2 class="text-3xl md:text-5xl font-black mb-6 italic uppercase tracking-tighter">Safety shouldn't have an expiration date.</h2>
+            <p class="text-xl opacity-90 max-w-2xl mx-auto mb-8 font-light">
+                By solving the "growth cost," we remove the final excuse for why Cambodia's children ride unprotected.
+            </p>
+            <div class="inline-block bg-white text-[#D32F2F] px-10 py-4 rounded-full font-bold text-lg">
+                Join the 2026 Launch
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="mt-20 text-center py-12 border-t border-slate-200 opacity-40">
+        <p class="text-xs font-black uppercase tracking-widest text-[#1A237E]">Economic Impact Study | SafeHeads KH Non-Profit</p>
+    </footer>
+
+    <script>
+        function wrapLabels(label) {
+            if (typeof label !== 'string' || label.length <= 16) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > 16) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
+
+        const tooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        const budgetCtx = document.getElementById('budgetChart').getContext('2d');
+        new Chart(budgetCtx, {
+            type: 'doughnut',
+            data: {
+                labels: [wrapLabels('Food and Water'), wrapLabels('Debt Repayment'), wrapLabels('Housing and Power'), wrapLabels('Remaining Balance')],
+                datasets: [{
+                    data: [65, 40, 30, 15],
+                    backgroundColor: ['#1A237E', '#D32F2F', '#334155', '#FFC107'],
+                    borderWidth: 0,
+                    hoverOffset: 20
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { padding: 20, font: { weight: 'bold' } } },
+                    tooltip: tooltipConfig
+                },
+                cutout: '70%'
+            }
+        });
+
+        const growthCtx = document.getElementById('growthChart').getContext('2d');
+        new Chart(growthCtx, {
+            type: 'line',
+            data: {
+                labels: ['Age 2', 'Age 3', 'Age 4', 'Age 5', 'Age 6', 'Age 7', 'Age 8', 'Age 9', 'Age 10'],
+                datasets: [{
+                    label: 'Head Circumference (cm)',
+                    data: [48, 49.5, 50.5, 51.2, 51.8, 52.3, 52.7, 53.1, 53.5],
+                    borderColor: '#1A237E',
+                    backgroundColor: 'rgba(26, 35, 126, 0.05)',
+                    fill: true,
+                    tension: 0.3,
+                    borderWidth: 5,
+                    pointBackgroundColor: '#FFC107',
+                    pointRadius: 6
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: tooltipConfig,
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { 
+                        title: { display: true, text: 'Centimeters' },
+                        grid: { color: '#f1f5f9' }
+                    }
+                }
+            }
+        });
+
+        const costCompareCtx = document.getElementById('costCompareChart').getContext('2d');
+        new Chart(costCompareCtx, {
+            type: 'bar',
+            data: {
+                labels: [wrapLabels('Standard Certified Helmet'), wrapLabels('TBI Emergency Care')],
+                datasets: [{
+                    label: 'Cost in USD',
+                    data: [20, 2500],
+                    backgroundColor: ['#FFC107', '#D32F2F'],
+                    borderRadius: 15
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    x: { 
+                        beginAtZero: true, 
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        ticks: { color: '#fff' }
+                    },
+                    y: { 
+                        ticks: { color: '#fff', font: { weight: 'bold' } }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

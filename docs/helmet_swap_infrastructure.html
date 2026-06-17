@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circular Safety | The Helmet Swap Infrastructure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Palette: Vibrant Sunset (Deep Blue #1A237E, Orange #FF5722, Amber #FFC107, Teal #009688) -->
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f1f5f9; color: #0f172a; }
+        .chart-container { position: relative; width: 100%; max-width: 650px; margin-left: auto; margin-right: auto; height: 350px; max-height: 400px; overflow: hidden; }
+        .swap-card { border-top: 6px solid #FF5722; transition: transform 0.3s ease; }
+        .swap-card:hover { transform: translateY(-10px); }
+        .gradient-text { background: linear-gradient(90deg, #FF5722, #FFC107); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .path-step { position: relative; }
+        .path-step:not(:last-child)::after { content: '→'; position: absolute; right: -2rem; top: 50%; transform: translateY(-50%); font-size: 2rem; color: #cbd5e1; font-weight: bold; }
+        @media (max-width: 768px) { .path-step:not(:last-child)::after { content: '↓'; right: 50%; top: auto; bottom: -2.5rem; transform: translateX(50%); } }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Introduction and Analysis Narrative Comment Block
+    Narrative Plan:
+    1. The Growth Problem: Visualize the rapid change in head circumference vs the static nature of helmets.
+    2. The Solution Infrastructure: A three-tier model (Manufacturing Hub, Distribution Spoke, Community Return).
+    3. The Financial Swap Model: Comparing 'Subscription' cost vs 'Market Purchase' cost over 10 years.
+    4. Operational Excellence: The Refurbishment and Safety Inspection flow.
+
+    Visualization Choices:
+    - Line Chart (Chart.js): Growth curves to justify the need for 4 distinct shell sizes.
+    - Horizontal Bar (Chart.js): Financial savings for families.
+    - Heatmap (Plotly.js): Demand distribution across regions (Canvas rendering).
+    - Grid/Box Layout (Tailwind): Process flow of the refurbishment cycle (NO SVG).
+    -->
+
+    <header class="bg-[#1A237E] text-white py-24 px-6 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-[#009688] opacity-10 rounded-full -mr-48 -mt-48"></div>
+        <div class="max-w-5xl mx-auto relative z-10 text-center">
+            <h1 class="text-5xl md:text-8xl font-extrabold mb-6 tracking-tighter italic">CIRCULAR <span class="text-[#FFC107]">SAFETY</span></h1>
+            <p class="text-xl md:text-3xl font-light opacity-90 max-w-3xl mx-auto leading-relaxed">
+                Building the infrastructure for a lifetime of protection. In our model, a helmet isn't a product—it's a <span class="font-bold text-[#FF5722]">service</span> that evolves with the child.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 -mt-16 pb-24">
+
+        <section class="bg-white rounded-[3rem] p-8 md:p-16 shadow-2xl mb-16">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-4xl font-extrabold text-[#1A237E] mb-6">The Growth Paradox</h2>
+                    <p class="text-slate-600 text-lg leading-relaxed mb-8">
+                        The primary reason parents in Cambodia avoid purchasing high-quality helmets is the "Growth Gap." Between ages 2 and 12, a child's head circumference increases by approximately 10cm. A properly fitted helmet only accommodates a 2cm variance. 
+                    </p>
+                    <div class="bg-slate-50 p-6 rounded-2xl border-l-8 border-[#FF5722]">
+                        <p class="text-sm font-semibold text-slate-500 uppercase tracking-widest mb-2">The Reality</p>
+                        <p class="text-slate-700 italic">"Why buy a $25 helmet today when it will be dangerously tight in 18 months? Most parents wait until the child is 'grown up,' leaving them unprotected during their most vulnerable years."</p>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="growthCurveChart"></canvas>
+                </div>
+            </div>
+            <p class="mt-8 text-center text-sm font-bold text-slate-400">Data Source: WHO Pediatric Anthropometric Standards adapted for SE Asia.</p>
+        </section>
+
+        <section class="mb-16">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-[#1A237E]">The "Swap" Infrastructure</h2>
+                <p class="text-slate-500 mt-4 max-w-2xl mx-auto">We replace the traditional retail model with a three-pillar circular system designed for local scalability and trust.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-10 rounded-3xl shadow-xl swap-card">
+                    <div class="text-4xl mb-4">🏭</div>
+                    <h3 class="text-2xl font-bold mb-4 text-[#1A237E]">Safety Hubs</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Centralized facilities in Phnom Penh and Siem Reap that handle professional cleaning, foam inspection, and ECE-standard shell testing.</p>
+                </div>
+                <div class="bg-white p-10 rounded-3xl shadow-xl swap-card border-[#009688]">
+                    <div class="text-4xl mb-4">🏫</div>
+                    <h3 class="text-2xl font-bold mb-4 text-[#009688]">School Spokes</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Every participating primary school acts as a collection point. Parents drop off the "small" and pick up the "medium" during morning enrollment.</p>
+                </div>
+                <div class="bg-white p-10 rounded-3xl shadow-xl swap-card border-[#FFC107]">
+                    <div class="text-4xl mb-4">📱</div>
+                    <h3 class="text-2xl font-bold mb-4 text-[#FFC107]">Digital Triage</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">A simple Telegram-based bot tracks each helmet's unique QR code, alerting parents when a growth-swap is due based on the child's age.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-slate-900 text-white rounded-[4rem] p-8 md:p-16 shadow-2xl mb-16 overflow-hidden relative">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="chart-container">
+                    <canvas id="costEfficiencyChart"></canvas>
+                </div>
+                <div>
+                    <h2 class="text-4xl font-extrabold mb-6">Unlocking Economic Access</h2>
+                    <p class="opacity-80 text-lg mb-8">
+                        The traditional "Buy New" model costs a family ~$100 over a child's growth cycle (4 helmets). Our <strong>Swap Infrastructure</strong> reduces this to a one-time $10 membership and a $2 swap fee.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-4 bg-white/10 p-4 rounded-xl">
+                            <div class="bg-[#FFC107] text-slate-900 font-bold px-3 py-1 rounded">75%</div>
+                            <span class="text-sm font-medium">Reduction in cost-per-year for protection.</span>
+                        </div>
+                        <div class="flex items-center space-x-4 bg-white/10 p-4 rounded-xl">
+                            <div class="bg-[#009688] text-white font-bold px-3 py-1 rounded">0%</div>
+                            <span class="text-sm font-medium">Plastic waste: Helmets are recycled/reconditioned.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16 text-center">
+            <h2 class="text-4xl font-extrabold text-[#1A237E] mb-12">The Refurbishment Cycle</h2>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-12 max-w-5xl mx-auto px-4">
+                <div class="path-step bg-white p-8 rounded-2xl shadow-lg w-full">
+                    <h4 class="font-bold text-[#FF5722] mb-2 uppercase text-xs tracking-widest">Step 1</h4>
+                    <p class="font-extrabold text-slate-800">Return & Credit</p>
+                    <p class="text-xs text-slate-500 mt-2">Family returns outgrown helmet; receives credit for next size.</p>
+                </div>
+                <div class="path-step bg-white p-8 rounded-2xl shadow-lg w-full">
+                    <h4 class="font-bold text-[#009688] mb-2 uppercase text-xs tracking-widest">Step 2</h4>
+                    <p class="font-extrabold text-slate-800">Deep Sanitize</p>
+                    <p class="text-xs text-slate-500 mt-2">Medical-grade UV and steam cleaning of all surfaces.</p>
+                </div>
+                <div class="path-step bg-white p-8 rounded-2xl shadow-lg w-full">
+                    <h4 class="font-bold text-[#FFC107] mb-2 uppercase text-xs tracking-widest">Step 3</h4>
+                    <p class="font-extrabold text-slate-800">Structural Scan</p>
+                    <p class="text-xs text-slate-500 mt-2">Ultrasonic test for micro-cracks in EPS foam liner.</p>
+                </div>
+                <div class="path-step bg-white p-8 rounded-2xl shadow-lg w-full">
+                    <h4 class="font-bold text-[#1A237E] mb-2 uppercase text-xs tracking-widest">Step 4</h4>
+                    <p class="font-extrabold text-slate-800">Re-Issue</p>
+                    <p class="text-xs text-slate-500 mt-2">New padding inserted; helmet certified for next user.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-[3rem] p-8 md:p-12 shadow-xl mb-16">
+            <h2 class="text-3xl font-extrabold text-center text-[#1A237E] mb-8">Regional Hub Demand Density</h2>
+            <div id="demandMap" class="w-full h-[450px]"></div>
+            <p class="text-center text-slate-500 max-w-2xl mx-auto mt-6 text-sm">
+                This analysis shows where infrastructure investment is most critical based on high child-to-motorcycle ratios in Kandal and Phnom Penh.
+            </p>
+        </section>
+
+        <section class="bg-gradient-to-r from-[#FF5722] to-[#FFC107] text-white p-12 rounded-[4rem] text-center shadow-2xl">
+            <h2 class="text-4xl md:text-6xl font-black mb-6 italic">PROTECTION AS A PROMISE.</h2>
+            <p class="text-xl opacity-90 max-w-3xl mx-auto mb-10 font-light leading-relaxed">
+                By building the <strong>swap infrastructure</strong>, we eliminate the economic burden of growth. We ensure that no child in Cambodia is ever "too big" for safety.
+            </p>
+            <div class="inline-block bg-[#1A237E] text-white px-12 py-4 rounded-full font-extrabold text-lg hover:scale-105 transition-transform cursor-pointer">
+                Invest in the Infrastructure
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-12 border-t border-slate-200 text-center opacity-40">
+        <p class="text-xs font-black uppercase tracking-[0.3em] text-[#1A237E]">SafeHeads Circular Logistics | Infrastructure Plan 2026</p>
+    </footer>
+
+    <script>
+        function wrapLabels(label) {
+            if (typeof label !== 'string' || label.length <= 16) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > 16) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
+
+        const tooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        const growthCtx = document.getElementById('growthCurveChart').getContext('2d');
+        new Chart(growthCtx, {
+            type: 'line',
+            data: {
+                labels: ['Age 2', 'Age 4', 'Age 6', 'Age 8', 'Age 10', 'Age 12'],
+                datasets: [{
+                    label: 'Avg. Head Circumference (cm)',
+                    data: [48, 50, 51.5, 53, 54, 55],
+                    borderColor: '#FF5722',
+                    borderWidth: 5,
+                    fill: false,
+                    tension: 0.4,
+                    pointRadius: 8,
+                    pointBackgroundColor: '#1A237E'
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    y: { 
+                        min: 45, 
+                        max: 60,
+                        title: { display: true, text: 'CM', font: { weight: 'bold' } }
+                    }
+                }
+            }
+        });
+
+        const costCtx = document.getElementById('costEfficiencyChart').getContext('2d');
+        new Chart(costCtx, {
+            type: 'bar',
+            data: {
+                labels: [wrapLabels('Market Purchase Model (4 Helmets)'), wrapLabels('SafeHeads Swap Membership')],
+                datasets: [{
+                    label: 'Total Cost Over 10 Years (USD)',
+                    data: [100, 18],
+                    backgroundColor: ['#D1D5DB', '#FFC107'],
+                    borderRadius: 12,
+                    barThickness: 50
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    x: { 
+                        beginAtZero: true, 
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        ticks: { color: '#ffffff' }
+                    },
+                    y: { 
+                        ticks: { color: '#ffffff', font: { weight: 'bold' } }
+                    }
+                }
+            }
+        });
+
+        const demandTrace = {
+            z: [[10, 20, 30, 40], [20, 50, 60, 30], [30, 60, 80, 50], [40, 30, 50, 20]],
+            x: ['Urban West', 'Phnom Penh Center', 'Urban East', 'Rural Border'],
+            y: ['High Income', 'Middle Income', 'Low Income', 'Vulnerable'],
+            type: 'heatmap',
+            colorscale: [
+                [0, '#1A237E'],
+                [0.5, '#009688'],
+                [1, '#FFC107']
+            ],
+            showscale: false
+        };
+
+        const demandLayout = {
+            margin: { t: 10, b: 50, l: 100, r: 10 },
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            font: { family: 'Plus Jakarta Sans', size: 10 }
+        };
+
+        Plotly.newPlot('demandMap', [demandTrace], demandLayout, { responsive: true, displayModeBar: false });
+
+    </script>
+    <!-- 
+    CONFIRMATION:
+    - NO Mermaid JS used.
+    - NO SVG graphics used (Icons are Unicode/CSS).
+    - Palette: Vibrant Sunset (Deep Blue, Orange, Amber, Teal).
+    - Tooltip logic applied to all Chart.js instances.
+    - Label wrapping logic applied for responsive readability.
+    -->
+</body>
+</html>
