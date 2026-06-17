@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Briefing | Jim's Helmets Cambodia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+        
+        :root {
+            --safety-orange: #F97316;
+            --deep-navy: #0F172A;
+            --parchment: #FDFCFB;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--parchment);
+            color: var(--deep-navy);
+            scroll-behavior: smooth;
+        }
+
+        .serif { font-family: 'Playfair Display', serif; }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        .glass-header {
+            background: rgba(253, 252, 251, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+        }
+
+        .impact-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .impact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .step-active {
+            border-left: 4px solid var(--safety-orange);
+            background: white;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-orange-100">
+
+<!-- Chosen Palette: Sovereign Safety (Ivory background, Deep Navy text, Safety Orange accents, Subtle Gold highlights) -->
+<!-- Application Structure Plan: The application is designed as an executive "Pitch Deck" turned SPA. It follows a logical flow: 
+    1. The Vision (Hero): High-impact mission statement.
+    2. The Data (Crisis): Visualizing the fatality share and the usage gap.
+    3. The Engineering (Trust): Explaining the science of the tropical helmet to build product confidence.
+    4. The Economics (ROI): A dynamic interactive section focusing on the $125k human capital value.
+    5. The Roadmap (Implementation): Clear Q1-Q4 milestones and a budget donut.
+    This structure was chosen to move a sophisticated donor or partner from 'Why' to 'How' to 'What is the ROI'. -->
+<!-- Visualization & Content Choices: 
+    1. Fatality Landscape -> Inform/Compare -> Chart.js Bar Chart -> Highlighting 75% motorcycle share.
+    2. Helmet Disparity -> Compare -> Chart.js Radar -> Comparing Adult vs. Child safety metrics.
+    3. Material Physics -> Inform -> Custom CSS Grid + Chart.js -> Demonstrating EPS energy absorption.
+    4. Operational Spend -> Organize -> Chart.js Doughnut -> 60% inventory allocation for transparency.
+    Confirming NO SVG/Mermaid JS used. -->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <nav class="fixed top-0 w-full z-50 glass-header px-8 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center">
+                    <span class="text-orange-500 font-extrabold text-2xl">J</span>
+                </div>
+                <span class="font-bold text-xl tracking-tighter uppercase">Jim's <span class="text-orange-600">Helmets</span></span>
+            </div>
+            <div class="hidden lg:flex space-x-10 text-xs font-bold uppercase tracking-widest text-slate-500">
+                <a href="#mission" class="hover:text-orange-600 transition">The Mission</a>
+                <a href="#science" class="hover:text-orange-600 transition">The Science</a>
+                <a href="#economics" class="hover:text-orange-600 transition">The Economics</a>
+                <a href="#roadmap" class="hover:text-orange-600 transition">The Roadmap</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span class="hidden md:block text-[10px] font-bold text-slate-400">STATUS: PRE-LAUNCH (Q4 2024)</span>
+                <button class="bg-orange-600 text-white px-6 py-2.5 rounded-full font-bold text-sm hover:shadow-lg hover:shadow-orange-200 transition-all">Join Coalition</button>
+            </div>
+        </div>
+    </nav>
+
+    <header id="mission" class="pt-40 pb-24 px-8 border-b border-slate-100">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-8">
+                <h1 class="serif text-6xl md:text-8xl leading-[0.9] text-slate-900">
+                    Safety is <br>
+                    <span class="italic text-orange-600">Development.</span>
+                </h1>
+                <p class="text-xl text-slate-600 leading-relaxed max-w-xl">
+                    Every child helmet distributed in Cambodia isn't just safety gear—it's an investment in the nation's human capital. We protect the future labor force from preventable trauma.
+                </p>
+                <div class="flex gap-4">
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex-1">
+                        <span class="block text-4xl font-extrabold text-slate-900">1.9k+</span>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Annual Road Deaths</span>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex-1">
+                        <span class="block text-4xl font-extrabold text-orange-600">&lt;10%</span>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Child Helmet Use</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-slate-900 rounded-[3rem] p-10 text-white relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-8 opacity-20 text-8xl font-serif">"</div>
+                <h4 class="text-2xl serif italic mb-8 leading-relaxed">
+                    "If a child survives an accident today because of a helmet, we save 60 years of productivity, innovation, and taxes."
+                </h4>
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center font-bold text-white">J</div>
+                    <div>
+                        <p class="font-bold">Jim's Helmets Board</p>
+                        <p class="text-xs text-slate-400">Mission Statement 2024</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="crisis" class="py-24 px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <h2 class="text-4xl font-extrabold mb-6">The Road Safety Disparity</h2>
+                <p class="text-slate-500">While driver compliance is high due to enforcement, child passengers remain the most vulnerable demographic on Cambodian roads. This is the "Safety Gap" we aim to close.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="p-8 bg-slate-50 rounded-3xl border border-slate-100">
+                    <h3 class="font-bold text-slate-800 mb-8 flex items-center gap-3">
+                        <span class="w-2 h-8 bg-orange-500 rounded-full"></span>
+                        Fatalities by Vehicle Type (%)
+                    </h3>
+                    <div class="chart-container">
+                        <canvas id="fatalityChart"></canvas>
+                    </div>
+                </div>
+                <div class="p-8 bg-slate-50 rounded-3xl border border-slate-100">
+                    <h3 class="font-bold text-slate-800 mb-8 flex items-center gap-3">
+                        <span class="w-2 h-8 bg-slate-800 rounded-full"></span>
+                        Compliance Radar: Adult vs. Child
+                    </h3>
+                    <div class="chart-container">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="science" class="py-24 px-8 bg-slate-900 text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div>
+                <span class="text-orange-500 font-bold uppercase text-xs tracking-[0.3em] mb-4 block">Engineering Trust</span>
+                <h2 class="serif text-4xl md:text-5xl font-bold mb-8 leading-tight">Tropical-Grade <br>Safety Engineering</h2>
+                <p class="text-slate-400 text-lg mb-10 leading-relaxed">
+                    Our helmets utilize high-density Expanded Polystyrene (EPS) liners. Unlike uncertified plastic caps, our gear is 98% air, designed to crush and absorb impact force before it reaches the developing skull.
+                </p>
+                <div class="space-y-6">
+                    <div class="flex items-center p-5 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition">
+                        <div class="text-3xl mr-6">280g</div>
+                        <div>
+                            <h5 class="font-bold">Ultra-Light Profile</h5>
+                            <p class="text-sm text-slate-500">Optimized for child neck strength; weighs less than a mango.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-5 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition">
+                        <div class="text-3xl mr-6">&#127777;</div>
+                        <div>
+                            <h5 class="font-bold">Passive Ventilation</h5>
+                            <p class="text-sm text-slate-500">Chimney-effect ducting to prevent heat stroke in 35°C humidity.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="absolute -top-20 -right-20 w-80 h-80 bg-orange-600/20 blur-[100px] rounded-full"></div>
+                <div class="bg-white rounded-[3rem] p-10 shadow-2xl">
+                    <h4 class="text-slate-900 font-extrabold text-center mb-8">Impact Attenuation Logic</h4>
+                    <div class="chart-container">
+                        <canvas id="impactLogicChart"></canvas>
+                    </div>
+                    <p class="text-slate-400 text-[10px] uppercase text-center mt-6 font-bold tracking-widest">Simulation: G-Force Load vs. Time (ms)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="economics" class="py-24 px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="bg-white rounded-[3rem] p-12 shadow-xl shadow-slate-200/50 border border-slate-100">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <h2 class="text-4xl font-extrabold mb-6">The Safety Dividend</h2>
+                        <p class="text-slate-600 mb-8 leading-relaxed">
+                            Every $25 invested in a certified helmet yields approximately $125,000 in lifetime GDP contribution by preventing permanent disability. This isn't just charity; it's macro-economic stability.
+                        </p>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="bg-slate-50 p-6 rounded-2xl">
+                                <span class="text-xs font-bold text-slate-400 uppercase">Est. ROI</span>
+                                <span class="block text-3xl font-extrabold text-orange-600">5000:1</span>
+                            </div>
+                            <div class="bg-slate-50 p-6 rounded-2xl">
+                                <span class="text-xs font-bold text-slate-400 uppercase">Lives Saved / 1k</span>
+                                <span class="block text-3xl font-extrabold text-slate-900">15+</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-8">
+                        <div class="p-6 bg-orange-600 rounded-3xl text-white text-center">
+                            <h4 class="font-bold uppercase text-xs tracking-widest mb-2 opacity-80">Economic Impact Target</h4>
+                            <div class="text-5xl font-extrabold mb-1">$125,000,000</div>
+                            <p class="text-sm opacity-80">Prevented Medical & Productivity Loss (By 2030)</p>
+                        </div>
+                        <div class="p-6 bg-slate-900 rounded-3xl text-white flex justify-between items-center">
+                            <div>
+                                <h4 class="font-bold text-lg">Year 1 Goal</h4>
+                                <p class="text-slate-400 text-xs uppercase font-bold tracking-widest">1,000 Helmets</p>
+                            </div>
+                            <button class="bg-orange-500 px-6 py-2 rounded-full font-bold text-sm">Join Pilot</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="roadmap" class="py-24 px-8 bg-slate-50 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+                <div>
+                    <h2 class="text-4xl font-extrabold mb-10">2024 Launch Roadmap</h2>
+                    <div class="space-y-0">
+                        <div class="p-6 step-active rounded-r-2xl mb-4 shadow-sm">
+                            <span class="text-orange-600 font-bold text-xs uppercase tracking-widest">Q1: Foundation</span>
+                            <h4 class="font-bold text-lg">NGO Filing & Board Formation</h4>
+                            <p class="text-slate-500 text-sm italic">501(c)(3) registration and Cambodian INGO MOU signature.</p>
+                        </div>
+                        <div class="p-6 border-l-4 border-slate-200 ml-1 mb-4">
+                            <span class="text-slate-400 font-bold text-xs uppercase tracking-widest">Q2: Procurement</span>
+                            <h4 class="font-bold text-lg text-slate-700">Inventory Sourcing</h4>
+                            <p class="text-slate-500 text-sm">Bulk order of 1,000 certified child units from Protec factory.</p>
+                        </div>
+                        <div class="p-6 border-l-4 border-slate-200 ml-1 mb-4">
+                            <span class="text-slate-400 font-bold text-xs uppercase tracking-widest">Q3: Deployment</span>
+                            <h4 class="font-bold text-lg text-slate-700">Pilot Assemblies</h4>
+                            <p class="text-slate-500 text-sm">Direct distribution in 3 high-risk school corridors in Phnom Penh.</p>
+                        </div>
+                        <div class="p-6 border-l-4 border-slate-200 ml-1">
+                            <span class="text-slate-400 font-bold text-xs uppercase tracking-widest">Q4: Analysis</span>
+                            <h4 class="font-bold text-lg text-slate-700">Impact Assessment</h4>
+                            <p class="text-slate-500 text-sm">Usage tracking and donor reporting for Year 2 scaling.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="text-4xl font-extrabold mb-10">Budget Integrity</h2>
+                    <div class="bg-white p-10 rounded-[2rem] shadow-sm border border-slate-100">
+                        <h4 class="text-center font-bold text-slate-400 uppercase text-xs tracking-widest mb-6">Allocation of $25,000 Pilot Fund</h4>
+                        <div class="chart-container">
+                            <canvas id="budgetChart"></canvas>
+                        </div>
+                        <div class="mt-10 grid grid-cols-2 gap-4">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 bg-orange-600 rounded-full"></span>
+                                <span class="text-xs font-bold text-slate-600">60% Inventory</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 bg-slate-900 rounded-full"></span>
+                                <span class="text-xs font-bold text-slate-600">20% Operations</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 bg-slate-400 rounded-full"></span>
+                                <span class="text-xs font-bold text-slate-600">12% Marketing</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 bg-slate-200 rounded-full"></span>
+                                <span class="text-xs font-bold text-slate-600">8% Admin</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white py-20 px-8 border-t border-slate-100 text-center">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="serif text-4xl mb-8">Ready to <span class="text-orange-600">save a future?</span></h2>
+            <p class="text-slate-500 mb-12 text-lg">We are seeking founding partners to support the first 1,000 helmets. Together, we can make road safety a human right for every Cambodian child.</p>
+            <div class="flex flex-wrap justify-center gap-6">
+                <button class="bg-slate-900 text-white px-10 py-4 rounded-full font-bold hover:bg-slate-800 transition">Download Briefing PDF</button>
+                <button class="bg-orange-600 text-white px-10 py-4 rounded-full font-bold shadow-xl shadow-orange-100 hover:scale-105 transition">Founding Partner Inquiry</button>
+            </div>
+            <div class="mt-20 pt-10 border-t border-slate-50 text-slate-400 text-[10px] font-bold uppercase tracking-[0.3em]">
+                Jim's Helmets © 2024 | A Global Public Health Initiative
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const wrapLabel = (label) => {
+            if (typeof label !== 'string') return label;
+            if (label.length <= 16) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > 16) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        };
+
+        // Fatality Chart
+        const ctxFatality = document.getElementById('fatalityChart').getContext('2d');
+        new Chart(ctxFatality, {
+            type: 'bar',
+            data: {
+                labels: ['Motorcycles', 'Pedestrians', 'Cars', 'Cyclists', 'Other'].map(wrapLabel),
+                datasets: [{
+                    data: [75, 12, 8, 3, 2],
+                    backgroundColor: '#F97316',
+                    borderRadius: 12,
+                    barThickness: 30
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#f1f5f9' }, title: { display: true, text: 'Percentage (%)' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // Radar Disparity Chart
+        const ctxRadar = document.getElementById('radarChart').getContext('2d');
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: ['Urban Helmet %', 'Rural Helmet %', 'Law Compliance', 'Safety Awareness', 'Infrastructure'].map(wrapLabel),
+                datasets: [
+                    {
+                        label: 'Adult Driver',
+                        data: [85, 60, 90, 75, 40],
+                        borderColor: '#0F172A',
+                        backgroundColor: 'rgba(15, 23, 42, 0.2)',
+                        pointBackgroundColor: '#0F172A'
+                    },
+                    {
+                        label: 'Child Passenger',
+                        data: [12, 2, 10, 15, 40],
+                        borderColor: '#F97316',
+                        backgroundColor: 'rgba(249, 115, 22, 0.3)',
+                        pointBackgroundColor: '#F97316'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
+                scales: {
+                    r: { angleLines: { display: true }, suggestedMin: 0, suggestedMax: 100, ticks: { display: false } }
+                }
+            }
+        });
+
+        // Impact Logic Chart (Physics)
+        const ctxImpact = document.getElementById('impactLogicChart').getContext('2d');
+        new Chart(ctxImpact, {
+            type: 'line',
+            data: {
+                labels: ['0', '10', '20', '30', '40', '50', '60'],
+                datasets: [
+                    {
+                        label: 'No Helmet / Uncertified',
+                        data: [0, 100, 400, 750, 300, 50, 0],
+                        borderColor: '#0F172A',
+                        borderDash: [5, 5],
+                        fill: false,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Jim\'s Certified EPS',
+                        data: [0, 40, 120, 180, 140, 80, 0],
+                        borderColor: '#F97316',
+                        backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom' } },
+                scales: {
+                    y: { display: false },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // Budget Chart
+        const ctxBudget = document.getElementById('budgetChart').getContext('2d');
+        new Chart(ctxBudget, {
+            type: 'doughnut',
+            data: {
+                labels: ['Inventory', 'Operations', 'Marketing', 'Admin'],
+                datasets: [{
+                    data: [60, 20, 12, 8],
+                    backgroundColor: ['#EA580C', '#0F172A', '#94A3B8', '#E2E8F0'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                cutout: '80%'
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jim's Helmets: Cambodia Feasibility Study</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC;
+            color: #1E293B;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 450px;
+        }
+
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+        }
+
+        .card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s;
+        }
+
+        .accent-border {
+            border-left: 4px solid #F97316;
+        }
+
+        .step-node {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            background-color: #F97316;
+        }
+
+        .timeline-line {
+            width: 2px;
+            background-color: #E2E8F0;
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+<!-- Palette: Vibrant & High-Contrast (Deep Navy #0F172A, Safety Orange #F97316, Teal #14B8A6, Slate #E2E8F0) -->
+<!-- Analysis Summary: 
+    The study identifies a critical gap in Cambodian road safety: while driver helmet use is rising due to enforcement, child passenger helmet use remains below 10%. 
+    Jim's Helmets addresses this through a high-impact distribution model targeting schools and hospitals. 
+    The narrative flows from the 'Crisis' (Traffic Deaths) to 'The Gap' (Helmet Usage) to 'The Solution' (Jim's Helmets Model) and finally the 'Roadmap'.
+-->
+<!-- Visualization Plan:
+    1. Fatalities by Vehicle Type -> Goal: Inform/Compare -> Chart.js Bar Chart (Highlighting Motorcycles).
+    2. Helmet Usage Disparity -> Goal: Compare -> Chart.js Grouped Bar (Adult vs. Child).
+    3. Economic Impact Scenarios -> Goal: Relationship -> Plotly Scatter Plot (WebGL).
+    4. Pilot Budget Breakdown -> Goal: Organize/Composition -> Chart.js Donut Chart.
+    5. Roadmap Timeline -> Goal: Organize -> Structured HTML/Tailwind Nodes.
+    Confirming NO SVG and NO MERMAID JS used.
+-->
+
+    <header class="hero-gradient text-white py-20 px-6 text-center shadow-2xl">
+        <div class="max-w-4xl mx-auto">
+            <div class="inline-block bg-orange-500 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4">Feasibility Study 2024</div>
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">Jim's <span class="text-orange-500">Helmets</span></h1>
+            <p class="text-xl md:text-2xl text-slate-300 font-light max-w-2xl mx-auto mb-8">
+                Protecting Cambodia’s future, one ride at a time. A strategic initiative to eliminate pediatric head trauma on Cambodian roads.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="bg-white/10 backdrop-blur-md px-6 py-4 rounded-xl border border-white/20">
+                    <span class="block text-3xl font-bold text-orange-400">1,976</span>
+                    <span class="text-sm uppercase tracking-wide text-slate-400">Annual Road Deaths</span>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md px-6 py-4 rounded-xl border border-white/20">
+                    <span class="block text-3xl font-bold text-orange-400">75%</span>
+                    <span class="text-sm uppercase tracking-wide text-slate-400">Motorcycle Involved</span>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md px-6 py-4 rounded-xl border border-white/20">
+                    <span class="block text-3xl font-bold text-orange-400">&lt;10%</span>
+                    <span class="text-sm uppercase tracking-wide text-slate-400">Child Helmet Use</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-16">
+        
+        <section class="mb-20">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">The Crisis: Cambodia's Roads</h2>
+                <p class="text-slate-600">
+                    Cambodia faces an escalating public health crisis. With motorcycle ownership exceeding 5 million units, the roads have become the primary source of preventable youth mortality. Despite legislative progress for drivers, passengers—specifically children—remain largely unprotected.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="card p-8">
+                    <h3 class="text-xl font-semibold mb-6 text-slate-800">Traffic Fatalities by Category</h3>
+                    <div class="chart-container">
+                        <canvas id="fatalityChart"></canvas>
+                    </div>
+                    <p class="mt-6 text-sm text-slate-500 italic">
+                        Source: WHO & Cambodian National Road Safety Committee. Motorcycles dominate 3/4 of all fatalities.
+                    </p>
+                </div>
+                <div class="space-y-6">
+                    <div class="accent-border bg-white p-6 rounded-r-xl shadow-sm">
+                        <h4 class="font-bold text-slate-900 mb-2">High Vulnerability: Ages 5-24</h4>
+                        <p class="text-slate-600 text-sm">Road traffic accidents are the leading cause of death for school-aged children in Cambodia. Head injuries account for 80% of these fatalities.</p>
+                    </div>
+                    <div class="accent-border bg-white p-6 rounded-r-xl shadow-sm">
+                        <h4 class="font-bold text-slate-900 mb-2">The Passenger Gap</h4>
+                        <p class="text-slate-600 text-sm">While 85% of motorcycle drivers in Phnom Penh wear helmets, child passenger rates are critically low, often cited as less than 5% in rural provinces.</p>
+                    </div>
+                    <div class="accent-border bg-white p-6 rounded-r-xl shadow-sm">
+                        <h4 class="font-bold text-slate-900 mb-2">Economic Burden</h4>
+                        <p class="text-slate-600 text-sm">A single serious head injury can cost a Cambodian family over $2,500 in medical fees and lost wages—often exceeding three years of household income.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Helmet Usage Comparison</h2>
+                <p class="text-slate-600">
+                    The disparity between adult drivers and child passengers is the primary focus of our mission. This "Safety Gap" is where Jim's Helmets will intervene directly.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="card p-8 md:col-span-2">
+                    <h3 class="text-xl font-semibold mb-6 text-slate-800">Compliance Rates: Adult vs. Child</h3>
+                    <div class="chart-container" style="max-width: 900px; height: 400px;">
+                        <canvas id="usageChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20 bg-slate-900 text-white p-12 rounded-3xl">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6 text-orange-400">Impact Scaling & Projections</h2>
+                    <p class="text-slate-300 mb-8 leading-relaxed">
+                        By providing high-quality, safety-certified helmets, we don't just save lives—we preserve the economic stability of entire communities. Our data models suggest that for every 1,000 helmets distributed, we prevent approximately 15 deaths and 45 severe head injuries annually.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl text-teal-400 font-bold">10k+</span>
+                            <span class="text-slate-400 text-sm uppercase">Helmets Target (Year 5)</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl text-teal-400 font-bold">$12.5M</span>
+                            <span class="text-slate-400 text-sm uppercase">Estimated Economic Benefit</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-6 overflow-hidden">
+                    <h3 class="text-slate-800 text-lg font-bold mb-4 text-center">Benefit-Cost Analysis</h3>
+                    <div id="impactPlot" style="width:100%; height:350px;"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Strategic Operating Model</h2>
+                <p class="text-slate-600">
+                    Jim's Helmets operates on a hybrid model: a U.S. 501(c)(3) foundation for fundraising and a registered International NGO (INGO) in Cambodia for direct local operations.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card p-8 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center text-2xl mb-6">&#127891;</div>
+                    <h4 class="font-bold text-lg mb-2">School Program</h4>
+                    <p class="text-sm text-slate-500">Distribution at primary schools integrated with mandatory road safety education for students and parents.</p>
+                </div>
+                <div class="card p-8 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-2xl mb-6">&#127973;</div>
+                    <h4 class="font-bold text-lg mb-2">Hospital Referral</h4>
+                    <p class="text-sm text-slate-500">Partnering with pediatric hospitals to provide helmets to families of children being discharged after trauma care.</p>
+                </div>
+                <div class="card p-8 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-2xl mb-6">&#128659;</div>
+                    <h4 class="font-bold text-lg mb-2">Police Partnerships</h4>
+                    <p class="text-sm text-slate-500">Coordinated events where traffic police distribute helmets instead of fines to families with unprotected children.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+                <div class="card p-8">
+                    <h3 class="text-xl font-semibold mb-6 text-slate-800">Pilot Budget: $25,000 (Year 1)</h3>
+                    <div class="chart-container">
+                        <canvas id="budgetChart"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-8">Year 1 Implementation Timeline</h3>
+                    <div class="space-y-0">
+                        <div class="flex gap-6 pb-8">
+                            <div class="flex flex-col items-center">
+                                <div class="step-node">1</div>
+                                <div class="timeline-line"></div>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-slate-900">Q1: Foundation</h5>
+                                <p class="text-sm text-slate-600">501(c)(3) filing, board formation, and MOU signing with Cambodian Ministry of Education.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6 pb-8">
+                            <div class="flex flex-col items-center">
+                                <div class="step-node">2</div>
+                                <div class="timeline-line"></div>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-slate-900">Q2: Procurement</h5>
+                                <p class="text-sm text-slate-600">Bulk ordering 1,000 safety-certified child helmets from local manufacturers (e.g., Protec).</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6 pb-8">
+                            <div class="flex flex-col items-center">
+                                <div class="step-node">3</div>
+                                <div class="timeline-line"></div>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-slate-900">Q3: Launch</h5>
+                                <p class="text-sm text-slate-600">Pilot distribution in 3 target schools in Phnom Penh and Kampong Cham.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div class="flex flex-col items-center">
+                                <div class="step-node">4</div>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-slate-900">Q4: Evaluation</h5>
+                                <p class="text-sm text-slate-600">Impact assessment, donor reporting, and scaling strategy for Year 2.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-white py-16 px-6 border-t-4 border-orange-500">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-6">Small Helmet. Big Future.</h2>
+            <p class="text-slate-400 mb-10">
+                Join us in making Cambodia's roads safer for the next generation. We are currently seeking founding partners and corporate sponsors for our 2024 Pilot Program.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left border-t border-slate-800 pt-10">
+                <div>
+                    <h6 class="text-orange-500 font-bold uppercase text-xs mb-4">Contact</h6>
+                    <p class="text-sm">Partnerships@JimsHelmets.org</p>
+                    <p class="text-sm">Phnom Penh, Cambodia</p>
+                </div>
+                <div>
+                    <h6 class="text-orange-500 font-bold uppercase text-xs mb-4">Mission</h6>
+                    <p class="text-sm">To eliminate preventable pediatric head injuries through universal helmet access.</p>
+                </div>
+                <div>
+                    <h6 class="text-orange-500 font-bold uppercase text-xs mb-4">Legal</h6>
+                    <p class="text-sm">501(c)(3) Nonprofit (Pending)</p>
+                    <p class="text-sm">Registered INGO Cambodia</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const wrapLabel = (label) => {
+            if (typeof label !== 'string') return label;
+            if (label.length <= 16) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > 16) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        };
+
+        const tooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        const ctxFatality = document.getElementById('fatalityChart').getContext('2d');
+        new Chart(ctxFatality, {
+            type: 'bar',
+            data: {
+                labels: ['Motorcycle Users', 'Pedestrians', 'Passenger Cars', 'Other Vehicles'].map(wrapLabel),
+                datasets: [{
+                    label: '% of Annual Deaths',
+                    data: [75, 12, 8, 5],
+                    backgroundColor: ['#F97316', '#1E293B', '#334155', '#94A3B8'],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    y: { beginAtZero: true, max: 100, title: { display: true, text: 'Percentage (%)' } }
+                }
+            }
+        });
+
+        const ctxUsage = document.getElementById('usageChart').getContext('2d');
+        new Chart(ctxUsage, {
+            type: 'bar',
+            data: {
+                labels: ['Phnom Penh', 'Siem Reap', 'Battambang', 'Rural Provinces'].map(wrapLabel),
+                datasets: [
+                    {
+                        label: 'Adult Drivers',
+                        data: [85, 78, 70, 55],
+                        backgroundColor: '#1E293B',
+                        borderRadius: 4
+                    },
+                    {
+                        label: 'Child Passengers',
+                        data: [8, 6, 5, 2],
+                        backgroundColor: '#F97316',
+                        borderRadius: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: tooltipConfig,
+                    legend: { position: 'bottom' }
+                },
+                scales: {
+                    y: { beginAtZero: true, max: 100, title: { display: true, text: 'Usage Rate (%)' } }
+                }
+            }
+        });
+
+        const ctxBudget = document.getElementById('budgetChart').getContext('2d');
+        new Chart(ctxBudget, {
+            type: 'doughnut',
+            data: {
+                labels: ['Helmet Inventory', 'Local Distribution', 'Marketing & Education', 'Admin & Legal'].map(wrapLabel),
+                datasets: [{
+                    data: [60, 15, 15, 10],
+                    backgroundColor: ['#F97316', '#14B8A6', '#0F172A', '#64748B'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: tooltipConfig,
+                    legend: { position: 'right' }
+                },
+                cutout: '65%'
+            }
+        });
+
+        const impactTrace = {
+            x: [100, 500, 1000, 5000, 10000],
+            y: [125, 625, 1250, 6250, 12500],
+            text: ['100 Helmets', '500 Helmets', '1k Helmets', '5k Helmets', '10k Helmets'],
+            mode: 'markers+lines',
+            type: 'scatter',
+            marker: {
+                size: [10, 15, 20, 30, 40],
+                color: '#F97316'
+            },
+            line: { color: '#0F172A' }
+        };
+
+        const impactLayout = {
+            title: { text: 'Helmets vs Economic Savings ($1,000s)', font: { size: 14 } },
+            margin: { t: 40, r: 20, l: 40, b: 40 },
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            xaxis: { title: 'Helmets Distributed', gridcolor: '#F1F5F9' },
+            yaxis: { title: 'Benefit (USD)', gridcolor: '#F1F5F9' }
+        };
+
+        Plotly.newPlot('impactPlot', [impactTrace], impactLayout, { responsive: true, displayModeBar: false });
+
+    </script>
+</body>
+</html>

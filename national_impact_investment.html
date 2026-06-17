@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prosperity Through Protection | Jim's Helmets National Case</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;700&family=Inter:wght@300;400;600;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FAF9F6;
+            color: #1A202C;
+        }
+
+        .serif { font-family: 'Crimson Pro', serif; }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 380px;
+            max-height: 450px;
+        }
+
+        .gold-gradient {
+            background: linear-gradient(135deg, #B79455 0%, #8C6D31 100%);
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid #E2E8F0;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #B79455;
+            transform: translateY(-2px);
+        }
+
+        .pulse {
+            animation: pulse-animation 2s infinite;
+        }
+
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0px rgba(183, 148, 85, 0.4); }
+            100% { box-shadow: 0 0 0 20px rgba(183, 148, 85, 0); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+<!-- Chosen Palette: Sovereign Growth (Parchment White, Earthy Gold, Deep Forest Green, Slate Grey) -->
+<!-- Application Structure Plan: This application is a macro-economic briefing for high-level government officials and institutional donors. It is structured into three pillars: 1. The Human Capital ROI (Life-cycle value), 2. The Social Proof Tipping Point (Cultural normalization), and 3. The Path to Development (Macro-economic stability). The flow moves from the individual child's potential to the nation's GDP impact. -->
+<!-- Visualization & Content Choices: 
+    1. Economic Growth -> Inform -> Chart.js Line Chart -> Projected cumulative GDP contribution of saved lives vs. TBI costs -> Justification: Shows that safety is an investment, not an expense.
+    2. Social Proof Loop -> Organize -> Interactive Step-Flow -> Visualizing how visible helmet use spreads through a village -> Justification: Explains the "Success speaks for itself" phenomenon.
+    3. The Developed Nation Benchmark -> Compare -> Chart.js Radar Chart -> Comparing current Cambodia safety metrics against "Developed Nation" targets -> Justification: Provides a clear finish line for policy makers.
+    Confirming NO SVG/Mermaid JS used. -->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <nav class="py-6 px-8 border-b border-stone-200 bg-white/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 gold-gradient rounded-full"></div>
+                <span class="font-bold tracking-tighter text-xl uppercase">Jim's <span class="text-amber-700">Helmets</span></span>
+            </div>
+            <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400">Policy Briefing: Cambodia 2030</div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-6 py-16">
+        
+        <header class="mb-20 text-center">
+            <h1 class="serif text-5xl md:text-7xl font-bold text-stone-900 mb-6 leading-tight">Safety as <br><span class="italic text-amber-700">Economic Destiny.</span></h1>
+            <p class="text-xl text-stone-600 max-w-3xl mx-auto leading-relaxed">
+                When a child survives an accident because of a helmet, we aren't just saving a life—we are saving 60 years of labor, creativity, and taxes. We are preventing the medical debt that bankrupts rural families. This is the foundation of a developed nation.
+            </p>
+        </header>
+
+        <!-- Pillar 1: The Human Capital ROI -->
+        <section class="mb-24">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="text-amber-700 font-bold uppercase text-xs tracking-widest block mb-4">Pillar 01: Human Capital</span>
+                    <h2 class="serif text-4xl font-bold mb-6">Preventing the "Brain Drain" of Trauma</h2>
+                    <p class="text-stone-600 mb-8 leading-relaxed">
+                        Every Traumatic Brain Injury (TBI) removed from the healthcare system releases resources for schools, infrastructure, and innovation. A helmeted generation is a productive generation.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="stat-card p-6 rounded-2xl">
+                            <div class="text-3xl font-bold text-stone-800">$125,000</div>
+                            <div class="text-xs text-stone-500 uppercase mt-1">LIFETIME GDP VALUE / CHILD</div>
+                        </div>
+                        <div class="stat-card p-6 rounded-2xl">
+                            <div class="text-3xl font-bold text-stone-800">400%</div>
+                            <div class="text-xs text-stone-500 uppercase mt-1">ROI ON SAFETY GEAR</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-xl shadow-stone-200/50">
+                    <h4 class="text-center font-bold text-stone-700 mb-6">Projected Economic Gain (USD Millions)</h4>
+                    <div class="chart-container">
+                        <canvas id="roiChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pillar 2: The Social Proof Cycle -->
+        <section class="mb-24 py-20 bg-stone-100 rounded-[3rem] px-10 border border-stone-200">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-amber-700 font-bold uppercase text-xs tracking-widest block mb-4">Pillar 02: Cultural Normalization</span>
+                <h2 class="serif text-4xl font-bold mb-6">Success That Speaks for Itself</h2>
+                <p class="text-stone-600">
+                    Road safety isn't taught; it's seen. When a village sees a child walk away from a fall because of their helmet, the 1% usage rate evaporates. Safety becomes the "Social Proof" of status and intelligence.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="relative text-center">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm font-bold text-amber-700 border border-stone-200">01</div>
+                    <h5 class="font-bold mb-3">Visible Protection</h5>
+                    <p class="text-sm text-stone-500">Early adopters (students) wear high-viz Jim's Helmets, making safety a visible presence in every market and schoolyard.</p>
+                </div>
+                <div class="relative text-center">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm font-bold text-amber-700 border border-stone-200">02</div>
+                    <h5 class="font-bold mb-3">The "Walk-Away" Event</h5>
+                    <p class="text-sm text-stone-500">A child survives an incident. The story spreads through the village. The myth of "soft necks" is shattered by the reality of survival.</p>
+                </div>
+                <div class="relative text-center">
+                    <div class="w-16 h-16 gold-gradient text-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl font-bold pulse">03</div>
+                    <h5 class="font-bold mb-3">Mass Adoption</h5>
+                    <p class="text-sm text-stone-500">Unprotected riding becomes socially stigmatized. Helmet usage shifts from 1% to 90% as safety becomes a point of parental pride.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pillar 3: The Path to Development -->
+        <section class="mb-24">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1 bg-white p-8 rounded-3xl shadow-xl shadow-stone-200/50">
+                    <h4 class="text-center font-bold text-stone-700 mb-6">The Development Benchmark</h4>
+                    <div class="chart-container">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2">
+                    <span class="text-amber-700 font-bold uppercase text-xs tracking-widest block mb-4">Pillar 03: Macro Strategy</span>
+                    <h2 class="serif text-4xl font-bold mb-6">From Developing to <br>Developed Nation Status</h2>
+                    <p class="text-stone-600 mb-8 leading-relaxed">
+                        Developed nations don't have high road safety because they are rich; they are rich, in part, because they don't waste 3-5% of their GDP on preventable traffic trauma. Cambodia’s "Vision 2050" depends on a safe transport infrastructure.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 bg-white p-4 rounded-xl border border-stone-100 shadow-sm">
+                            <span class="text-green-600 font-bold text-xl">&#9733;</span>
+                            <div>
+                                <span class="font-bold block text-stone-800">Lower Insurance Risk</span>
+                                <span class="text-sm text-stone-500 italic">Predictable safety reduces transport costs for the entire supply chain.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 bg-white p-4 rounded-xl border border-stone-100 shadow-sm">
+                            <span class="text-green-600 font-bold text-xl">&#9733;</span>
+                            <div>
+                                <span class="font-bold block text-stone-800">Healthcare Decongestion</span>
+                                <span class="text-sm text-stone-500 italic">Freeing up trauma beds for maternal care and disease prevention.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="bg-stone-900 rounded-[3rem] p-12 md:p-20 text-center text-white relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full opacity-10" style="background-image: radial-gradient(#B79455 1px, transparent 1px); background-size: 20px 20px;"></div>
+            <div class="relative z-10">
+                <h2 class="serif text-4xl md:text-6xl font-bold mb-8">Invest in the <br><span class="text-amber-500 italic">Safety Dividend.</span></h2>
+                <p class="text-stone-400 max-w-2xl mx-auto mb-10 text-lg">
+                    We are currently seeking strategic partners to scale the Jim's Helmet model across all 25 provinces. Let's build a Cambodia where every ride is a promise of a future.
+                </p>
+                <div class="flex flex-wrap justify-center gap-6">
+                    <button class="px-10 py-4 gold-gradient rounded-full font-bold shadow-2xl hover:scale-105 transition-transform">Download Economic Study</button>
+                    <button class="px-10 py-4 bg-white/10 backdrop-blur-md rounded-full font-bold border border-white/20 hover:bg-white/20 transition-colors">Partner with Us</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-12 border-t border-stone-200 px-6 text-center">
+        <p class="text-stone-400 text-sm italic">Jim's Helmets: A High-Yield Public Health Initiative for the Kingdom of Cambodia.</p>
+    </footer>
+
+    <script>
+        const wrapLabel = (label) => {
+            if (typeof label !== 'string') return label;
+            if (label.length <= 16) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > 16) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        };
+
+        const ctxROI = document.getElementById('roiChart').getContext('2d');
+        new Chart(ctxROI, {
+            type: 'line',
+            data: {
+                labels: ['2024', '2025', '2026', '2027', '2028', '2029', '2030'],
+                datasets: [
+                    {
+                        label: 'GDP Contribution (Saved Lives)',
+                        data: [0.5, 2.8, 8.4, 18.2, 35.6, 62.1, 98.4],
+                        borderColor: '#B79455',
+                        backgroundColor: 'rgba(183, 148, 85, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Avoided TBI Costs',
+                        data: [0.2, 1.4, 4.2, 9.1, 17.8, 31.0, 49.2],
+                        borderColor: '#1A202C',
+                        borderDash: [5, 5],
+                        fill: false,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } }
+                },
+                scales: {
+                    y: { grid: { color: '#f1f5f9' }, title: { display: true, text: 'USD Millions', font: { size: 10 } } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        const ctxRadar = document.getElementById('radarChart').getContext('2d');
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: ['Child Safety', 'Infra Quality', 'Law Compliance', 'Health Response', 'Vehicle Standards'].map(wrapLabel),
+                datasets: [
+                    {
+                        label: 'Cambodia Current',
+                        data: [15, 30, 45, 25, 20],
+                        borderColor: '#1A202C',
+                        backgroundColor: 'rgba(26, 32, 44, 0.2)',
+                        pointBackgroundColor: '#1A202C'
+                    },
+                    {
+                        label: 'Developed Target',
+                        data: [95, 85, 90, 95, 90],
+                        borderColor: '#B79455',
+                        backgroundColor: 'rgba(183, 148, 85, 0.2)',
+                        pointBackgroundColor: '#B79455'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } }
+                },
+                scales: {
+                    r: {
+                        angleLines: { display: true },
+                        suggestedMin: 0,
+                        suggestedMax: 100,
+                        ticks: { display: false }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
