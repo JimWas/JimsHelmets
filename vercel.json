@@ -1,5 +1,72 @@
 {
   "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/crisis.html",
+      "destination": "/crisis",
+      "permanent": true
+    },
+    {
+      "source": "/technology.html",
+      "destination": "/technology",
+      "permanent": true
+    },
+    {
+      "source": "/intervention.html",
+      "destination": "/intervention",
+      "permanent": true
+    },
+    {
+      "source": "/impact.html",
+      "destination": "/impact",
+      "permanent": true
+    },
+    {
+      "source": "/partners.html",
+      "destination": "/partners",
+      "permanent": true
+    },
+    {
+      "source": "/donate.html",
+      "destination": "/donate",
+      "permanent": true
+    },
+    {
+      "source": "/barriers.html",
+      "destination": "/barriers",
+      "permanent": true
+    },
+    {
+      "source": "/governance.html",
+      "destination": "/governance",
+      "permanent": true
+    },
+    {
+      "source": "/research.html",
+      "destination": "/research",
+      "permanent": true
+    },
+    {
+      "source": "/helmet.html",
+      "destination": "/helmet",
+      "permanent": true
+    },
+    {
+      "source": "/problem.html",
+      "destination": "/problem",
+      "permanent": true
+    },
+    {
+      "source": "/work.html",
+      "destination": "/work",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/",
