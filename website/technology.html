@@ -3,38 +3,82 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tropical Helmet Design | Jim's Helmets</title>
+  <meta name="description" content="The tropical child helmet engineering case behind Jim's Helmets.">
+  <title>The Helmet | Jim's Helmets</title>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" href="assets/logos/favicon.ico" type="image/x-icon">
 </head>
 <body>
-  <header>
-    
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="crisis.html">Crisis</a>
-      <a href="technology.html">Technology</a>
-      <a href="barriers.html">Barriers</a>
-      <a href="intervention.html">Intervention</a>
-      <a href="governance.html">Governance</a>
-      <a href="research.html">Research</a>
-      <a href="donate.html">Donate</a>
-    </nav>
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="index.html"><span class="brand-mark"></span><span>Jim's Helmets</span></a>
+      <button class="mobile-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle>☰</button>
+      <nav class="nav-links" data-nav-links>
+        <a href="crisis.html">The Crisis</a>
+        <a href="technology.html">The Helmet</a>
+        <a href="intervention.html">The Program</a>
+        <a href="impact.html">Impact</a>
+        <a href="partners.html">Partners</a>
+        <a href="donate.html" class="button">Donate</a>
+      </nav>
+    </div>
   </header>
+
   <main>
-    <section class="card">
-      <h2>Engineering Safety: The Tropical Helmet</h2>
-      <p>Standard adult helmets are physically incompatible with children. We engineer solutions specific to the Cambodian context.</p>
-      <ul>
-        <li><strong>Impact Absorption:</strong> EPS liner reduces peak impact forces from 450 Gs (in plastic caps) to ~150 Gs.</li>
-        <li><strong>Thermal Engineering:</strong> Passive ducting and Venturi-effect exhaust ports maintain comfort in 35°C heat.</li>
-        <li><strong>Ergonomics:</strong> Ultra-lightweight 280g profile eliminates neck strain for toddlers and young children.</li>
-        <li><strong>Certification:</strong> Meets international standards (ECE 22.06).</li>
-      </ul>
+    <section class="page-hero">
+      <div class="section-inner">
+        <div>
+          <p class="eyebrow">The helmet</p>
+          <h1>Protection only works when children will actually wear it.</h1>
+        </div>
+        <p class="lede">The research points to a specific product requirement: certified impact protection, child sizing, very low weight, and tropical airflow. The helmet has to answer the crash physics and the parent's real concerns at the same time.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner helmet-visual" aria-label="Helmet engineering diagram">
+        <div class="helmet-shell"></div>
+        <div class="hotspot one">Vent channels move heat away from the scalp</div>
+        <div class="hotspot two">Certified shell and EPS absorb crash force</div>
+        <div class="hotspot three">Child sizing reduces fatigue and improves fit</div>
+        <div class="hotspot four">Secure chin strap keeps protection in place</div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="section-inner grid four">
+        <article class="panel"><h3>EPS impact liner</h3><p>Expanded polystyrene crushes during impact, slowing head deceleration instead of passing force straight to the skull.</p></article>
+        <article class="panel"><h3>Tropical airflow</h3><p>Passive intake and exhaust channels are a compliance feature in 35C heat, not a luxury.</p></article>
+        <article class="panel"><h3>Low child weight</h3><p>The plan targets around 280g for small sizes, subject to supplier confirmation and certification review.</p></article>
+        <article class="panel"><h3>Certified sourcing</h3><p>The program differentiates certified child helmets from thin fashion caps that look protective but can fail in real crashes.</p></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner section-head">
+        <div>
+          <p class="eyebrow">Parent questions</p>
+          <h2>The helmet page has to remove the reasons a parent says no.</h2>
+        </div>
+        <p class="lede">Donor money becomes more powerful when the product itself solves the barriers: heat, neck strain fears, skull-growth myths, poor fit, and replacement cost as children grow.</p>
+      </div>
+      <div class="section-inner faq">
+        <details class="faq-item" open><summary>Will a helmet hurt a child's neck?</summary><p>A certified child helmet is designed for a child's anatomy. The program avoids adult-weight helmets and uses fitting sessions to keep the helmet stable and comfortable.</p></details>
+        <details class="faq-item"><summary>Will it affect head or brain growth?</summary><p>No. A helmet rests externally and does not stop natural skull growth. The education module explains this simply during parent workshops.</p></details>
+        <details class="faq-item"><summary>What about heat?</summary><p>The sourcing criteria prioritize vented tropical designs because heat is one of the main reasons children remove helmets.</p></details>
+        <details class="faq-item"><summary>Why not buy cheaper plastic caps?</summary><p>The mission is clinical protection, not the appearance of safety. Certified helmets include energy-absorbing liners and secure retention systems.</p></details>
+      </div>
     </section>
   </main>
-  <footer>
-    <p>&copy; 2026 Jim's Helmets</p>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div><a class="brand" href="index.html"><span class="brand-mark"></span><span>Jim's Helmets</span></a><p>A helmet made for the child, the crash, and the climate.</p></div>
+      <div><h3>Explore</h3><a href="crisis.html">The Crisis</a><a href="barriers.html">Barriers</a><a href="research.html">Research</a></div>
+      <div><h3>Program</h3><a href="intervention.html">The Program</a><a href="impact.html">Impact</a><a href="partners.html">Partners</a></div>
+      <div><h3>Act</h3><a href="donate.html">Donate</a><a href="mailto:hello@jimshelmets.org">Partner inquiry</a></div>
+    </div>
   </footer>
+  <script src="js/main.js"></script>
 </body>
 </html>

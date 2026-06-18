@@ -10,16 +10,44 @@
       "destination": "/website/problem.html"
     },
     {
+      "source": "/crisis",
+      "destination": "/website/crisis.html"
+    },
+    {
       "source": "/helmet",
       "destination": "/website/helmet.html"
+    },
+    {
+      "source": "/technology",
+      "destination": "/website/technology.html"
     },
     {
       "source": "/work",
       "destination": "/website/work.html"
     },
     {
+      "source": "/intervention",
+      "destination": "/website/intervention.html"
+    },
+    {
+      "source": "/barriers",
+      "destination": "/website/barriers.html"
+    },
+    {
       "source": "/impact",
       "destination": "/website/impact.html"
+    },
+    {
+      "source": "/partners",
+      "destination": "/website/partners.html"
+    },
+    {
+      "source": "/governance",
+      "destination": "/website/governance.html"
+    },
+    {
+      "source": "/research",
+      "destination": "/website/research.html"
     },
     {
       "source": "/donate",
