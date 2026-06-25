@@ -542,10 +542,18 @@ input[type="range"] {
   display: block;
   margin-bottom: 6px;
   color: var(--sun);
-  font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+  font-size: clamp(1.2rem, 2.2vw, 2.2rem);
   line-height: 1.1;
   overflow-wrap: break-word;
   word-break: break-word;
+}
+
+.grid.four .metric {
+  padding: 18px 14px;
+}
+
+.grid.four .metric strong {
+  font-size: clamp(1rem, 1.6vw, 1.5rem);
 }
 
 .budget-bars {
