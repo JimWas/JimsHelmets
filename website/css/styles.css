@@ -99,7 +99,7 @@ a {
 
 .nav-links a {
   text-decoration: none;
-  color: var(--muted);
+  color: var(--ink);
   font-weight: 800;
   font-size: 0.92rem;
   padding: 10px 12px;
@@ -233,7 +233,7 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 30px;
+  margin-top: 48px;
 }
 
 .hero-proof {
@@ -542,8 +542,10 @@ input[type="range"] {
   display: block;
   margin-bottom: 6px;
   color: var(--sun);
-  font-size: 2.2rem;
-  line-height: 1;
+  font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+  line-height: 1.1;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .budget-bars {
