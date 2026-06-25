@@ -1,3 +1,38 @@
+// Lightbox
+const lightbox = document.createElement("div");
+lightbox.className = "lightbox";
+lightbox.innerHTML = '<button class="lightbox-close" aria-label="Close">&times;</button><img alt="">';
+document.body.appendChild(lightbox);
+
+const lightboxImg = lightbox.querySelector("img");
+
+function openLightbox(src, alt) {
+  lightboxImg.src = src;
+  lightboxImg.alt = alt || "";
+  lightbox.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeLightbox() {
+  lightbox.classList.remove("open");
+  document.body.style.overflow = "";
+  lightboxImg.src = "";
+}
+
+lightbox.addEventListener("click", (e) => {
+  if (e.target !== lightboxImg) closeLightbox();
+});
+
+lightbox.querySelector(".lightbox-close").addEventListener("click", closeLightbox);
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeLightbox();
+});
+
+document.querySelectorAll(".photo-grid img, .photo-frame img").forEach((img) => {
+  img.addEventListener("click", () => openLightbox(img.src, img.alt));
+});
+
 const navToggle = document.querySelector("[data-nav-toggle]");
 const navLinks = document.querySelector("[data-nav-links]");
 
