@@ -616,6 +616,26 @@ input[type="range"] {
   color: var(--white);
 }
 
+.page-hero-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(16, 33, 43, 0.94), rgba(16, 33, 43, 0.68) 50%, rgba(16, 33, 43, 0.42)),
+    linear-gradient(0deg, rgba(16, 33, 43, 0.72), rgba(16, 33, 43, 0.08) 50%),
+    var(--hero-bg) center / cover no-repeat;
+  transform: scale(1.01);
+}
+
+.page-hero-bg .section-inner {
+  position: relative;
+}
+
 .page-hero .section-inner {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(260px, 0.5fr);
