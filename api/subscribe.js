@@ -3,10 +3,14 @@ const { Pool } = require('pg');
 let pool;
 function getPool() {
   if (!pool) {
-    pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
-      ssl: { rejectUnauthorized: false },
-    });
+    const connectionString =
+      process.env.DATABASE_URL ||
+      process.env.POSTGRES_URL ||
+      process.env.POSTGRES_PRISMA_URL;
+    if (!connectionString) {
+      throw new Error('No database connection string found in environment variables.');
+    }
+    pool = new Pool({ connectionString, ssl: { rejectUnauthorized: false } });
   }
   return pool;
 }
