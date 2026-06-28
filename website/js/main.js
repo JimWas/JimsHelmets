@@ -71,7 +71,7 @@ document.querySelectorAll('[data-subscribe]').forEach(form => {
       if (res.ok) {
         form.hidden = true;
         msg.className = 'newsletter-msg success';
-        msg.textContent = 'You're subscribed — thank you!';
+        msg.textContent = "You’re subscribed — thank you!";
       } else {
         msg.className = 'newsletter-msg error';
         msg.textContent = data.error || 'Something went wrong. Please try again.';
