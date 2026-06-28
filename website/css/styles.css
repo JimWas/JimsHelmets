@@ -692,6 +692,46 @@ input[type="range"] {
   color: var(--muted);
 }
 
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+.newsletter-form input[type="email"] {
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 0.9rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+.newsletter-form input[type="email"]::placeholder {
+  color: rgba(255, 255, 255, 0.38);
+}
+.newsletter-form button {
+  padding: 10px 14px;
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.newsletter-form button:hover { opacity: 0.88; }
+.newsletter-form button:disabled { opacity: 0.55; cursor: default; }
+.newsletter-msg {
+  font-size: 0.85rem;
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.7);
+}
+.newsletter-msg.success { color: #6ee7b7; }
+.newsletter-msg.error   { color: #fca5a5; }
+
 @media (max-width: 900px) {
   .mobile-toggle {
     display: grid;

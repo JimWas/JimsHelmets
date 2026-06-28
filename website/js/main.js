@@ -51,6 +51,43 @@ document.querySelectorAll(".nav-links a").forEach((link) => {
   }
 });
 
+// Newsletter signup
+document.querySelectorAll('[data-subscribe]').forEach(form => {
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const input = form.querySelector('input[type="email"]');
+    const btn   = form.querySelector('button');
+    const msg   = form.nextElementSibling;
+    btn.disabled = true;
+    btn.textContent = 'Subscribing…';
+    try {
+      const res  = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: input.value }),
+      });
+      const data = await res.json();
+      msg.hidden = false;
+      if (res.ok) {
+        form.hidden = true;
+        msg.className = 'newsletter-msg success';
+        msg.textContent = 'You're subscribed — thank you!';
+      } else {
+        msg.className = 'newsletter-msg error';
+        msg.textContent = data.error || 'Something went wrong. Please try again.';
+        btn.disabled = false;
+        btn.textContent = 'Subscribe';
+      }
+    } catch {
+      msg.hidden = false;
+      msg.className = 'newsletter-msg error';
+      msg.textContent = 'Network error. Please try again.';
+      btn.disabled = false;
+      btn.textContent = 'Subscribe';
+    }
+  });
+});
+
 const slider = document.querySelector("[data-impact-slider]");
 const helmetCount = document.querySelector("[data-helmet-count]");
 const childrenProtected = document.querySelector("[data-children-protected]");
