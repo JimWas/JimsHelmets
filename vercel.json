@@ -110,6 +110,10 @@
       "destination": "/website/beliefs.html"
     },
     {
+      "source": "/podcast",
+      "destination": "/website/podcast.html"
+    },
+    {
       "source": "/impact",
       "destination": "/website/impact.html"
     },
