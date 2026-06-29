@@ -66,24 +66,24 @@ document.querySelectorAll('[data-subscribe]').forEach(form => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: input.value }),
       });
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
       msg.hidden = false;
       if (res.ok) {
         form.hidden = true;
-        msg.className = 'newsletter-msg success';
+        msg.className = ‘newsletter-msg success’;
         msg.textContent = "You’re subscribed — thank you!";
       } else {
-        msg.className = 'newsletter-msg error';
-        msg.textContent = data.error || 'Something went wrong. Please try again.';
+        msg.className = ‘newsletter-msg error’;
+        msg.textContent = data.error || `Server error (${res.status}). Please try again.`;
         btn.disabled = false;
-        btn.textContent = 'Subscribe';
+        btn.textContent = ‘Subscribe’;
       }
     } catch {
       msg.hidden = false;
-      msg.className = 'newsletter-msg error';
-      msg.textContent = 'Network error. Please try again.';
+      msg.className = ‘newsletter-msg error’;
+      msg.textContent = ‘Could not reach the server. Check your connection and try again.’;
       btn.disabled = false;
-      btn.textContent = 'Subscribe';
+      btn.textContent = ‘Subscribe’;
     }
   });
 });
