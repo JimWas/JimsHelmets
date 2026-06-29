@@ -42,6 +42,11 @@
       "permanent": true
     },
     {
+      "source": "/beliefs.html",
+      "destination": "/beliefs",
+      "permanent": true
+    },
+    {
       "source": "/governance.html",
       "destination": "/governance",
       "permanent": true
@@ -99,6 +104,10 @@
     {
       "source": "/barriers",
       "destination": "/website/barriers.html"
+    },
+    {
+      "source": "/beliefs",
+      "destination": "/website/beliefs.html"
     },
     {
       "source": "/impact",

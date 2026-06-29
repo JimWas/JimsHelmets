@@ -396,6 +396,15 @@ h3 {
   align-items: center;
 }
 
+.media-split.reverse {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+  direction: rtl;
+}
+
+.media-split.reverse > * {
+  direction: ltr;
+}
+
 .photo-frame {
   overflow: hidden;
   border-radius: var(--radius);
