@@ -51,13 +51,41 @@ document.querySelectorAll(".nav-links a").forEach((link) => {
   }
 });
 
+// Newsletter toast popup
+const toast = document.createElement('div');
+toast.className = 'subscribe-toast';
+toast.setAttribute('role', 'status');
+toast.setAttribute('aria-live', 'polite');
+toast.innerHTML = '<span class="subscribe-toast-icon"></span><span class="subscribe-toast-msg"></span><button class="subscribe-toast-close" aria-label="Dismiss">&times;</button>';
+document.body.appendChild(toast);
+
+const toastIcon = toast.querySelector('.subscribe-toast-icon');
+const toastMsg  = toast.querySelector('.subscribe-toast-msg');
+const toastClose = toast.querySelector('.subscribe-toast-close');
+let toastTimer;
+
+function showToast(type, message) {
+  clearTimeout(toastTimer);
+  toast.className = 'subscribe-toast ' + type;
+  toastIcon.textContent = type === 'success' ? '✓' : '⚠';
+  toastMsg.textContent = message;
+  toast.classList.add('visible');
+  if (type === 'success') {
+    toastTimer = setTimeout(() => toast.classList.remove('visible'), 6000);
+  }
+}
+
+toastClose.addEventListener('click', () => {
+  clearTimeout(toastTimer);
+  toast.classList.remove('visible');
+});
+
 // Newsletter signup
 document.querySelectorAll('[data-subscribe]').forEach(form => {
   form.addEventListener('submit', async e => {
     e.preventDefault();
     const input = form.querySelector('input[type="email"]');
     const btn   = form.querySelector('button');
-    const msg   = form.nextElementSibling;
     btn.disabled = true;
     btn.textContent = 'Subscribing…';
     try {
@@ -67,24 +95,17 @@ document.querySelectorAll('[data-subscribe]').forEach(form => {
         body: JSON.stringify({ email: input.value }),
       });
       const data = await res.json().catch(() => ({}));
-      msg.hidden = false;
       if (res.ok) {
-        form.hidden = true;
-        msg.className = ‘newsletter-msg success’;
-        msg.textContent = "You’re subscribed — thank you!";
+        form.reset();
+        showToast('success', "You're subscribed — thank you! We'll send campaign updates only.");
       } else {
-        msg.className = ‘newsletter-msg error’;
-        msg.textContent = data.error || `Server error (${res.status}). Please try again.`;
-        btn.disabled = false;
-        btn.textContent = ‘Subscribe’;
+        showToast('error', data.error || 'Something went wrong. Please try again.');
       }
     } catch {
-      msg.hidden = false;
-      msg.className = ‘newsletter-msg error’;
-      msg.textContent = ‘Could not reach the server. Check your connection and try again.’;
-      btn.disabled = false;
-      btn.textContent = ‘Subscribe’;
+      showToast('error', 'Could not reach the server. Check your connection and try again.');
     }
+    btn.disabled = false;
+    btn.textContent = 'Subscribe';
   });
 });
 
