@@ -6,6 +6,8 @@ All notable changes to jimshelmets.org are recorded here.
 
 ## 2026-06-30
 
+- Fix newsletter API fully working — emails now logging to Neon PostgreSQL
+- Fix Vercel deployment config — clear Root Directory, set Output Directory to `website`, simplify vercel.json rewrites so cleanUrls handles page routing and api/ functions are recognized
 - Fix Vercel function deployment — add `package-lock.json` and explicit `functions` config so `/api/subscribe` is recognized and `pg` is installed
 - Fix about page photo grid — remove photos Jim is not in, restructure into two clean balanced grids (3×3 + 2×2)
 - Add four more Jim photos to about page (hilltop group, Cambodian flag, reclining Buddha, Siem Reap airport mural)
