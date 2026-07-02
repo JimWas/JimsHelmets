@@ -4,6 +4,12 @@ All notable changes to jimshelmets.org are recorded here.
 
 ---
 
+## 2026-07-02
+
+- Add NGO JSON-LD structured data to homepage — org name, logo, founder, area served, and donate action for Google search/knowledge panel
+- Fix OG image — swap portrait photo for landscape (1800×1256) across all pages so social/ad crawlers get a valid preview image
+- Add Open Graph and Twitter Card meta tags to all 14 pages for rich link previews
+
 ## 2026-06-30
 
 - Fix newsletter API fully working — emails now logging to Neon PostgreSQL
