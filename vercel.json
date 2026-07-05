@@ -17,6 +17,11 @@
       "permanent": true
     },
     {
+      "source": "/science.html",
+      "destination": "/science",
+      "permanent": true
+    },
+    {
       "source": "/intervention.html",
       "destination": "/intervention",
       "permanent": true

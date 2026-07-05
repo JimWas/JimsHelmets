@@ -43,10 +43,11 @@ if (navToggle && navLinks) {
   });
 }
 
-const currentPage = window.location.pathname.split("/").pop() || "index.html";
+const normalizedPath = window.location.pathname.replace(/\.html$/, "").replace(/\/$/, "") || "/";
 document.querySelectorAll(".nav-links a").forEach((link) => {
   const href = link.getAttribute("href");
-  if (href === currentPage) {
+  const normalizedHref = href ? href.replace(/\.html$/, "").replace(/\/$/, "") || "/" : "";
+  if (normalizedHref === normalizedPath) {
     link.classList.add("active");
   }
 });
